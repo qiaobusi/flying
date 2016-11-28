@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#FF5722</color>
+    <color name="colorPrimaryDark">#FF5722</color>
+    <color name="colorAccent">#FF5722</color>
+
+    <color name="colorWindow">#ECEDF1</color>
+    <color name="colorInput">#FFFFFF</color>
+    <color name="colorInputHint">#CCCCCC</color>
+    <color name="colorLine">#CCCCCC</color>
+    <color name="colorButton">#FF5722</color>
+    <color name="colorButtonText">#FFFFFF</color>
+
+    <color name="colorWheelLine">#FF5722</color>
+    <color name="colorWheelNormal">#777777</color>
+    <color name="colorWheelSelected">#000000</color>
+
+</resources>
