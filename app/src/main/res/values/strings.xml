@@ -9,7 +9,4 @@
     <string name="confirm">确认</string>
     <string name="set_success">设置成功</string>
 
-    <string name="toast_input_am_time">请输入打开时间</string>
-    <string name="toast_input_pm_time">请输入关闭时间</string>
-
 </resources>

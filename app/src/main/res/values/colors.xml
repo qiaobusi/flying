@@ -6,9 +6,8 @@
 
     <color name="colorWindow">#ECEDF1</color>
     <color name="colorInput">#FFFFFF</color>
-    <color name="colorInputHint">#CCCCCC</color>
-    <color name="colorLine">#CCCCCC</color>
     <color name="colorButton">#FF5722</color>
+    <color name="colorButtonRipple">#E64A19</color>
     <color name="colorButtonText">#FFFFFF</color>
 
     <color name="colorWheelLine">#FF5722</color>

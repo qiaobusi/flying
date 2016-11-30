@@ -4,8 +4,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Build;
-import android.provider.Settings;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -160,12 +158,12 @@ public class MainActivity extends AppCompatActivity {
 
                 editor.commit();
 
-                Intent intent = new Intent(MainActivity.this, MainService.class);
-                startService(intent);
-
                 Toast.makeText(MainActivity.this, R.string.set_success, Toast.LENGTH_SHORT).show();
             }
         });
+
+
+
 
     }
 
