@@ -2,7 +2,6 @@ package com.wjc.flyinghelper;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -18,10 +17,8 @@ import android.widget.Toast;
 
 import com.jp.wheelview.WheelView;
 import com.wjc.flyinghelper.Config.Config;
-import com.wjc.flyinghelper.Service.MainService;
 
 import java.util.ArrayList;
-
 
 public class MainActivity extends AppCompatActivity {
 
