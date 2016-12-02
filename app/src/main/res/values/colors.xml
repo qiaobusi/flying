@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#FF5722</color>
-    <color name="colorPrimaryDark">#FF5722</color>
+    <color name="colorPrimaryDark">#E64A19</color>
     <color name="colorAccent">#FF5722</color>
 
     <color name="colorWindow">#ECEDF1</color>
     <color name="colorInput">#FFFFFF</color>
     <color name="colorButton">#FF5722</color>
-    <color name="colorButtonRipple">#E64A19</color>
+    <color name="colorButtonRipple">#DD2C00</color>
     <color name="colorButtonText">#FFFFFF</color>
 
     <color name="colorWheelLine">#FF5722</color>
