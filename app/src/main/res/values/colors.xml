@@ -4,11 +4,13 @@
     <color name="colorPrimaryDark">#E64A19</color>
     <color name="colorAccent">#FF5722</color>
 
+    <color name="colorWhite">#FFFFFF</color>
+
+    <color name="colorInputRipple">#E3E2E2</color>
+
     <color name="colorWindow">#ECEDF1</color>
-    <color name="colorInput">#FFFFFF</color>
     <color name="colorButton">#FF5722</color>
-    <color name="colorButtonRipple">#DD2C00</color>
-    <color name="colorButtonText">#FFFFFF</color>
+    <color name="colorButtonRipple">#E64A19</color>
 
     <color name="colorWheelLine">#FF5722</color>
     <color name="colorWheelNormal">#777777</color>

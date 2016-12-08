@@ -22,7 +22,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    private LinearLayout amTimeLinearLayout, pmTimeLinearLayout;
+    private LinearLayout amTimeLinearLayout, pmTimeLinearLayout, switchCompatLinearLayout;
     private TextView amTimeTextView, pmTimeTextView;
     private SwitchCompat switchCompat;
     private View amDialogView, pmDialogView;
@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
     private void initViewComponent() {
         amTimeLinearLayout = (LinearLayout) findViewById(R.id.amTimeLinearLayout);
         pmTimeLinearLayout = (LinearLayout) findViewById(R.id.pmTimeLinearLayout);
+        switchCompatLinearLayout = (LinearLayout) findViewById(R.id.switchCompatLinearLayout);
 
         amTimeTextView = (TextView) findViewById(R.id.amTimeTextView);
         pmTimeTextView = (TextView) findViewById(R.id.pmTimeTextView);
@@ -135,6 +136,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        switchCompatLinearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (switchCompat.isChecked()) {
+                    switchCompat.setChecked(false);
+                } else {
+                    switchCompat.setChecked(true);
+                }
+            }
+        });
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -158,9 +170,6 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, R.string.set_success, Toast.LENGTH_SHORT).show();
             }
         });
-
-
-
 
     }
 

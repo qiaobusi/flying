@@ -19,7 +19,7 @@
             android:layout_height="match_parent"
             android:text="@string/app_name"
             android:gravity="center"
-            android:textColor="@color/colorInput"
+            android:textColor="@color/colorWhite"
             android:textSize="@dimen/toolbar_text_size"/>
     </android.support.v7.widget.Toolbar>
 
@@ -34,7 +34,7 @@
         android:orientation="horizontal"
         android:paddingLeft="@dimen/padding_left"
         android:paddingRight="@dimen/padding_right"
-        android:background="@color/colorInput">
+        android:background="@drawable/selector_linearlayout">
         <TextView
             android:layout_width="@dimen/dp_0"
             android:layout_weight="1"
@@ -62,7 +62,7 @@
         android:orientation="horizontal"
         android:paddingLeft="@dimen/padding_left"
         android:paddingRight="@dimen/padding_right"
-        android:background="@color/colorInput">
+        android:background="@drawable/selector_linearlayout">
         <TextView
             android:layout_width="@dimen/dp_0"
             android:layout_weight="1"
@@ -83,12 +83,13 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/line_height" />
     <LinearLayout
+        android:id="@+id/switchCompatLinearLayout"
         android:layout_width="match_parent"
         android:layout_height="@dimen/switch_height"
         android:orientation="horizontal"
         android:paddingLeft="@dimen/padding_left"
         android:paddingRight="@dimen/padding_right"
-        android:background="@color/colorInput">
+        android:background="@drawable/selector_linearlayout">
         <TextView
             android:layout_width="@dimen/dp_0"
             android:layout_weight="1"
@@ -100,7 +101,8 @@
             android:id="@+id/switchCompat"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:checked="true"/>
+            android:checked="false"
+            android:clickable="false"/>
     </LinearLayout>
 
     <View
@@ -118,7 +120,7 @@
             android:layout_height="@dimen/button_height"
             android:text="@string/confirm"
             android:textSize="@dimen/button_text_size"
-            android:textColor="@color/colorButtonText"
+            android:textColor="@color/colorWhite"
             android:background="@drawable/selector_button"/>
     </LinearLayout>
 
