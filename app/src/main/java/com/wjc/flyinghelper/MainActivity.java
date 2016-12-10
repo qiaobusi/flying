@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.jp.wheelview.WheelView;
 import com.wjc.flyinghelper.Config.Config;
+import com.wjc.flyinghelper.Util.WheelData;
 
 import java.util.ArrayList;
 
@@ -32,6 +33,9 @@ public class MainActivity extends AppCompatActivity {
     private String[] hours = {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"};
     private String[] minutes = {"00", "05", "10", "15", "20", "25", "30", "35", "40", "45", "50", "55"};
     private ArrayList<String> hourList, minuteList;
+
+    private String amTimeWheel = "";
+    private String pmTimeWheel = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,8 +82,15 @@ public class MainActivity extends AppCompatActivity {
                 amMinute = (WheelView) amDialogView.findViewById(R.id.amMinute);
                 amHour.setData(hourList);
                 amMinute.setData(minuteList);
-                amHour.setDefault(0);
-                amMinute.setDefault(0);
+
+                amTimeWheel = amTimeTextView.getText().toString();
+                pmTimeWheel = pmTimeTextView.getText().toString();
+
+                int amTimeHourIndex = WheelData.getWheelDataIndex(Config.amHour, amTimeWheel, pmTimeWheel, hourList, minuteList);
+                int amTimeMinuteIndex = WheelData.getWheelDataIndex(Config.amMinute, amTimeWheel, pmTimeWheel, hourList, minuteList);
+
+                amHour.setDefault(amTimeHourIndex);
+                amMinute.setDefault(amTimeMinuteIndex);
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                 builder.setTitle(R.string.am_time);
@@ -111,8 +122,15 @@ public class MainActivity extends AppCompatActivity {
                 pmMinute = (WheelView) pmDialogView.findViewById(R.id.pmMinute);
                 pmHour.setData(hourList);
                 pmMinute.setData(minuteList);
-                pmHour.setDefault(0);
-                pmMinute.setDefault(0);
+
+                amTimeWheel = amTimeTextView.getText().toString();
+                pmTimeWheel = pmTimeTextView.getText().toString();
+
+                int pmTimeHourIndex = WheelData.getWheelDataIndex(Config.pmHour, amTimeWheel, pmTimeWheel, hourList, minuteList);
+                int pmTimeMinuteIndex = WheelData.getWheelDataIndex(Config.pmMinute, amTimeWheel, pmTimeWheel, hourList, minuteList);
+
+                pmHour.setDefault(pmTimeHourIndex);
+                pmMinute.setDefault(pmTimeMinuteIndex);
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                 builder.setTitle(R.string.pm_time);
@@ -150,8 +168,8 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String amText = amTimeTextView.getText().toString();
-                String pmText = pmTimeTextView.getText().toString();
+                String amTime = amTimeTextView.getText().toString();
+                String pmTime = pmTimeTextView.getText().toString();
                 int switchText = 0;
 
                 if (switchCompat.isChecked()) {
@@ -161,8 +179,8 @@ public class MainActivity extends AppCompatActivity {
                 SharedPreferences sharedPreferences = getSharedPreferences(Config.name, Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
 
-                editor.putString(Config.amTime, amText);
-                editor.putString(Config.pmTime, pmText);
+                editor.putString(Config.amTime, amTime);
+                editor.putString(Config.pmTime, pmTime);
                 editor.putInt(Config.switchCompat, switchText);
 
                 editor.commit();
@@ -176,15 +194,15 @@ public class MainActivity extends AppCompatActivity {
     private void initTimeValue() {
         SharedPreferences sharedPreferences = getSharedPreferences(Config.name, Context.MODE_PRIVATE);
 
-        String amText = sharedPreferences.getString(Config.amTime, "");
-        String pmText = sharedPreferences.getString(Config.pmTime, "");
+        String amTime = sharedPreferences.getString(Config.amTime, "");
+        String pmTime = sharedPreferences.getString(Config.pmTime, "");
         int switchText = sharedPreferences.getInt(Config.switchCompat, 0);
 
-        if (!amText.equals("")) {
-            amTimeTextView.setText(amText);
+        if (!amTime.equals("")) {
+            amTimeTextView.setText(amTime);
         }
-        if (!pmText.equals("")) {
-            pmTimeTextView.setText(pmText);
+        if (!pmTime.equals("")) {
+            pmTimeTextView.setText(pmTime);
         }
         if (switchText == 1) {
             switchCompat.setChecked(true);
@@ -193,5 +211,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
 
 }

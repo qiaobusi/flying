@@ -1,12 +1,12 @@
 <resources>
-    <string name="app_name">飞行助手</string>
+    <string name="app_name">生活助手</string>
     <string name="am_time">开启时间</string>
     <string name="pm_time">关闭时间</string>
-    <string name="am_time_default">06:00</string>
-    <string name="pm_time_default">22:00</string>
+    <string name="am_time_default">22:00</string>
+    <string name="pm_time_default">06:00</string>
     <string name="ok">确认</string>
     <string name="cancel">取消</string>
-    <string name="confirm">确认</string>
+    <string name="confirm">确 认</string>
     <string name="set_success">设置成功</string>
 
 </resources>
