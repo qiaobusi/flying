@@ -13,7 +13,7 @@
     <dimen name="button_radius">5dp</dimen>
 
     <dimen name="text_size">16sp</dimen>
-    <dimen name="toolbar_text_size">16sp</dimen>
+    <dimen name="tab_text_size">16sp</dimen>
     <dimen name="button_text_size">16sp</dimen>
 
     <dimen name="wheel_mask_height">32dp</dimen>

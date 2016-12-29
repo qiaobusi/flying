@@ -9,4 +9,7 @@
     <string name="confirm">确 认</string>
     <string name="set_success">设置成功</string>
 
+    <string name="tab_sleep">睡 眠</string>
+    <string name="tab_life">生 活</string>
+
 </resources>
