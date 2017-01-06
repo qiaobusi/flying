@@ -1,4 +1,4 @@
-package com.wjc.flyinghelper;
+package com.wjc.flyinghelper.receiver;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -9,7 +9,7 @@ import android.telephony.TelephonyManager;
 import java.lang.reflect.Method;
 
 import com.android.internal.telephony.ITelephony;
-import com.wjc.flyinghelper.Util.FlyingState;
+import com.wjc.flyinghelper.util.FlyingState;
 
 public class PhoneStateReceiver extends BroadcastReceiver {
 

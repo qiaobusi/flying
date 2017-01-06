@@ -1,10 +1,10 @@
-package com.wjc.flyinghelper;
+package com.wjc.flyinghelper.receiver;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
-import com.wjc.flyinghelper.Util.FlyingState;
+import com.wjc.flyinghelper.util.FlyingState;
 
 
 public class SmsStateReceiver extends BroadcastReceiver {

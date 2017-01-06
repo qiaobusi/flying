@@ -1,9 +1,9 @@
-package com.wjc.flyinghelper.Util;
+package com.wjc.flyinghelper.util;
 
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import com.wjc.flyinghelper.Config.Config;
+import com.wjc.flyinghelper.config.Config;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

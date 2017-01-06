@@ -1,4 +1,4 @@
-package com.wjc.flyinghelper.Adapter;
+package com.wjc.flyinghelper.adapter;
 
 import android.content.Context;
 import android.support.v4.app.Fragment;
@@ -40,4 +40,5 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
     public CharSequence getPageTitle(int position) {
         return context.getString(titles[position]);
     }
+
 }

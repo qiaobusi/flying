@@ -19,8 +19,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jp.wheelview.WheelView;
-import com.wjc.flyinghelper.Config.Config;
-import com.wjc.flyinghelper.Util.WheelData;
+import com.wjc.flyinghelper.config.Config;
+import com.wjc.flyinghelper.util.WheelData;
 
 import java.util.ArrayList;
 

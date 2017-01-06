@@ -4,115 +4,117 @@
     android:layout_height="match_parent"
     tools:context="com.wjc.flyinghelper.SleepFragment">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="@color/colorWindow"
-        android:focusable="true"
-        android:focusableInTouchMode="true">
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/edittext_margin_top" />
-
-        <LinearLayout
-            android:id="@+id/amTimeLinearLayout"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/input_time_height"
-            android:orientation="horizontal"
-            android:paddingLeft="@dimen/padding_left"
-            android:paddingRight="@dimen/padding_right"
-            android:background="@drawable/selector_linearlayout">
-            <TextView
-                android:layout_width="@dimen/dp_0"
-                android:layout_weight="1"
-                android:layout_height="match_parent"
-                android:text="@string/am_time"
-                android:gravity="center_vertical"
-                android:textSize="@dimen/text_size"/>
-            <TextView
-                android:id="@+id/amTimeTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="@string/am_time_default"
-                android:gravity="center_vertical"
-                android:textSize="@dimen/text_size"/>
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/line_height" />
-
-        <LinearLayout
-            android:id="@+id/pmTimeLinearLayout"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/input_time_height"
-            android:orientation="horizontal"
-            android:paddingLeft="@dimen/padding_left"
-            android:paddingRight="@dimen/padding_right"
-            android:background="@drawable/selector_linearlayout">
-            <TextView
-                android:layout_width="@dimen/dp_0"
-                android:layout_weight="1"
-                android:layout_height="match_parent"
-                android:text="@string/pm_time"
-                android:gravity="center_vertical"
-                android:textSize="@dimen/text_size"/>
-            <TextView
-                android:id="@+id/pmTimeTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="@string/pm_time_default"
-                android:gravity="center_vertical"
-                android:textSize="@dimen/text_size"/>
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/line_height" />
-        <LinearLayout
-            android:id="@+id/switchCompatLinearLayout"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/switch_height"
-            android:orientation="horizontal"
-            android:paddingLeft="@dimen/padding_left"
-            android:paddingRight="@dimen/padding_right"
-            android:background="@drawable/selector_linearlayout">
-            <TextView
-                android:layout_width="@dimen/dp_0"
-                android:layout_weight="1"
-                android:layout_height="match_parent"
-                android:text="@string/app_name"
-                android:gravity="center_vertical"
-                android:textSize="@dimen/text_size"/>
-            <android.support.v7.widget.SwitchCompat
-                android:id="@+id/switchCompat"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:checked="false"
-                android:clickable="false"/>
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/button_margin_top" />
-
+        android:layout_height="wrap_content">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="@dimen/padding_left"
-            android:paddingRight="@dimen/padding_right">
-            <Button
-                android:id="@+id/button"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@color/colorWindow">
+
+            <View
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/button_height"
-                android:text="@string/confirm"
-                android:textSize="@dimen/button_text_size"
-                android:textColor="@color/colorWhite"
-                android:background="@drawable/selector_button"/>
-        </LinearLayout>
+                android:layout_height="@dimen/line_height" />
 
-    </LinearLayout>
+            <LinearLayout
+                android:id="@+id/amTimeLinearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/input_height"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/padding_left"
+                android:paddingRight="@dimen/padding_right"
+                android:background="@drawable/selector_linearlayout">
+                <TextView
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:text="@string/am_time"
+                    android:gravity="center_vertical"
+                    android:textSize="@dimen/text_size"/>
+                <TextView
+                    android:id="@+id/amTimeTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="@string/am_time_default"
+                    android:gravity="center_vertical"
+                    android:textSize="@dimen/text_size"/>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_height" />
+
+            <LinearLayout
+                android:id="@+id/pmTimeLinearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/input_height"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/padding_left"
+                android:paddingRight="@dimen/padding_right"
+                android:background="@drawable/selector_linearlayout">
+                <TextView
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:text="@string/pm_time"
+                    android:gravity="center_vertical"
+                    android:textSize="@dimen/text_size"/>
+                <TextView
+                    android:id="@+id/pmTimeTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="@string/pm_time_default"
+                    android:gravity="center_vertical"
+                    android:textSize="@dimen/text_size"/>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_height" />
+            <LinearLayout
+                android:id="@+id/switchCompatLinearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/switch_height"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/padding_left"
+                android:paddingRight="@dimen/padding_right"
+                android:background="@drawable/selector_linearlayout">
+                <TextView
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:text="@string/app_name"
+                    android:gravity="center_vertical"
+                    android:textSize="@dimen/text_size"/>
+                <android.support.v7.widget.SwitchCompat
+                    android:id="@+id/switchCompat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:checked="false"
+                    android:clickable="false"/>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/button_margin_top" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/padding_left"
+                android:paddingRight="@dimen/padding_right">
+                <Button
+                    android:id="@+id/button"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/button_height"
+                    android:text="@string/confirm"
+                    android:textSize="@dimen/button_text_size"
+                    android:textColor="@color/colorWhite"
+                    android:background="@drawable/selector_button"/>
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
 
 </FrameLayout>

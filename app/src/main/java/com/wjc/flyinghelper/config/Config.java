@@ -1,4 +1,4 @@
-package com.wjc.flyinghelper.Config;
+package com.wjc.flyinghelper.config;
 
 
 public class Config {
