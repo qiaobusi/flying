@@ -32,4 +32,5 @@ dependencies {
     compile files('src/main/libs/mobAPI-1.0.6.jar')
     compile files('src/main/libs/MobCommons-2016.0727.1113.jar')
     compile files('src/main/libs/MobTools-2016.0727.1113.jar')
+    compile 'com.google.android.gms:play-services-appindexing:8.4.0'
 }

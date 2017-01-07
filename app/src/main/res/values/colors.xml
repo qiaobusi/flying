@@ -4,14 +4,15 @@
     <color name="colorPrimaryDark">#E64A19</color>
     <color name="colorAccent">#FF5722</color>
 
+    <!-- common -->
     <color name="colorWhite">#FFFFFF</color>
-
-    <color name="colorInputRipple">#E3E2E2</color>
-
     <color name="colorWindow">#ECEDF1</color>
     <color name="colorButton">#FF5722</color>
+    <color name="colorButtonDisabled">#BDBDBD</color>
     <color name="colorButtonRipple">#E64A19</color>
+    <color name="colorInputRipple">#E3E2E2</color>
 
+    <!-- wheel -->
     <color name="colorWheelLine">#FF5722</color>
     <color name="colorWheelNormal">#777777</color>
     <color name="colorWheelSelected">#000000</color>

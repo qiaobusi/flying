@@ -9,7 +9,7 @@
         layout="@layout/toolbar"/>
 
     <EditText
-        android:id="@+id/mobile"
+        android:id="@+id/idcard"
         android:layout_width="match_parent"
         android:layout_height="@dimen/input_height"
         android:layout_marginTop="@dimen/edittext_margin_top"
@@ -17,11 +17,35 @@
         android:paddingRight="@dimen/padding_right"
         android:background="@color/colorWhite"
         android:textSize="@dimen/text_size"
-        android:hint="@string/mobile"
+        android:hint="@string/idcard"
         android:inputType="phone"/>
 
     <TextView
-        android:id="@+id/mobileResult"
+        android:id="@+id/idcardArea"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/input_height"
+        android:layout_marginTop="@dimen/line_height"
+        android:paddingLeft="@dimen/padding_left"
+        android:paddingRight="@dimen/padding_right"
+        android:gravity="center_vertical"
+        android:background="@color/colorWhite"
+        android:textSize="@dimen/text_size"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/idcardBirth"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/input_height"
+        android:layout_marginTop="@dimen/line_height"
+        android:paddingLeft="@dimen/padding_left"
+        android:paddingRight="@dimen/padding_right"
+        android:gravity="center_vertical"
+        android:background="@color/colorWhite"
+        android:textSize="@dimen/text_size"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/idcardSex"
         android:layout_width="match_parent"
         android:layout_height="@dimen/input_height"
         android:layout_marginTop="@dimen/line_height"
@@ -39,7 +63,7 @@
         android:paddingLeft="@dimen/padding_left"
         android:paddingRight="@dimen/padding_right">
         <Button
-            android:id="@+id/mobileButton"
+            android:id="@+id/idcardButton"
             android:layout_width="match_parent"
             android:layout_height="@dimen/button_height"
             android:text="@string/query"

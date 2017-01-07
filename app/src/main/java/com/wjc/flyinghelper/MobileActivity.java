@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.mob.mobapi.API;
 import com.mob.mobapi.APICallback;
@@ -38,7 +39,6 @@ public class MobileActivity extends AppCompatActivity {
         toolbarText.setText(R.string.life_mobile);
     }
 
-
     private void initViewComponent() {
         mobile = (EditText) findViewById(R.id.mobile);
         mobileResult = (TextView) findViewById(R.id.mobileResult);
@@ -51,6 +51,8 @@ public class MobileActivity extends AppCompatActivity {
                 if (mobileText.length() == 0) {
                     return;
                 }
+
+                changeButtonStatus(0);
 
                 Mobile api = (Mobile) MobAPI.getAPI(Mobile.NAME);
                 api.phoneNumberToAddress(mobileText, new APICallback() {
@@ -69,17 +71,33 @@ public class MobileActivity extends AppCompatActivity {
                         if (mobileResult.getVisibility() == View.GONE) {
                             mobileResult.setVisibility(View.VISIBLE);
                         }
+
+                        changeButtonStatus(1);
                     }
 
                     @Override
                     public void onError(API api, int i, Throwable throwable) {
+                        Toast.makeText(MobileActivity.this, R.string.query_error, Toast.LENGTH_LONG).show();
 
+                        changeButtonStatus(1);
                     }
                 });
 
             }
         });
 
+    }
+
+    private void changeButtonStatus(int status) {
+        if (status == 0) {
+            mobileButton.setEnabled(false);
+            mobileButton.setText(R.string.querying);
+            mobileButton.setBackgroundResource(R.drawable.shape_button_disabled);
+        } else {
+            mobileButton.setEnabled(true);
+            mobileButton.setText(R.string.query);
+            mobileButton.setBackgroundResource(R.drawable.selector_button);
+        }
     }
 
 

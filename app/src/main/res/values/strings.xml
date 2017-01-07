@@ -1,5 +1,11 @@
 <resources>
     <string name="app_name">生活助手</string>
+
+    <!-- activity_main -->
+    <string name="tab_sleep">睡眠</string>
+    <string name="tab_life">生活</string>
+
+    <!-- fragment_sleep -->
     <string name="am_time">开启时间</string>
     <string name="pm_time">关闭时间</string>
     <string name="am_time_default">22:00</string>
@@ -9,9 +15,7 @@
     <string name="confirm">确认</string>
     <string name="set_success">设置成功</string>
 
-    <string name="tab_sleep">睡眠</string>
-    <string name="tab_life">生活</string>
-
+    <!-- fragment_life -->
     <string name="life_weather">天气预报</string>
     <string name="life_environment">空气质量</string>
     <string name="life_express">快递查询</string>
@@ -19,8 +23,17 @@
     <string name="life_mobile">手机归属地</string>
     <string name="life_idcard">身份证查询</string>
 
+    <!-- activity_idcard -->
+    <string name="aaa">身份证号码</string>
+
     <!-- activity_mobile -->
     <string name="mobile">手机号码</string>
+    <string name="query">查询</string>
+    <string name="querying">努力查询中...</string>
+    <string name="query_error">查询错误</string>
+
+    <!-- activity_idcard -->
+    <string name="idcard">身份证号码</string>
 
 
 </resources>

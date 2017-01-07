@@ -21,6 +21,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".MobileActivity" />
+        <activity android:name=".IdcardActivity" />
+        <activity android:name=".EnvironmentActivity"></activity>
 
         <receiver android:name=".receiver.PhoneStateReceiver">
             <intent-filter android:priority="1000">
@@ -34,7 +37,6 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".MobileActivity"></activity>
     </application>
 
 </manifest>

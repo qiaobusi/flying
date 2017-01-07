@@ -84,7 +84,8 @@ public class LifeFragment extends Fragment {
         lifeIdcard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(activity, "lifeIdcard", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(activity, IdcardActivity.class);
+                startActivity(intent);
             }
         });
 
