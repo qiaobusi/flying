@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.wjc.flyinghelper.LifeFragment">
+    tools:context="com.wjc.flyinghelper.fragment.LifeFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -20,23 +20,6 @@
                 android:orientation="horizontal">
 
                 <com.wjc.flyinghelper.view.SquareLayout
-                    android:id="@+id/lifeWeather"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="0dp"
-                    android:background="@drawable/selector_linearlayout">
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="@string/life_weather"
-                        android:gravity="center"/>
-                </com.wjc.flyinghelper.view.SquareLayout>
-
-                <Space
-                    android:layout_width="@dimen/line_height"
-                    android:layout_height="match_parent" />
-
-                <com.wjc.flyinghelper.view.SquareLayout
                     android:id="@+id/lifeEnvironment"
                     android:layout_width="0dp"
                     android:layout_weight="1"
@@ -49,13 +32,9 @@
                         android:gravity="center"/>
                 </com.wjc.flyinghelper.view.SquareLayout>
 
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/line_height"
-                android:orientation="horizontal">
+                <Space
+                    android:layout_width="@dimen/line_height"
+                    android:layout_height="match_parent" />
 
                 <com.wjc.flyinghelper.view.SquareLayout
                     android:id="@+id/lifeExpress"
@@ -67,23 +46,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:text="@string/life_express"
-                        android:gravity="center"/>
-                </com.wjc.flyinghelper.view.SquareLayout>
-
-                <Space
-                    android:layout_width="@dimen/line_height"
-                    android:layout_height="match_parent" />
-
-                <com.wjc.flyinghelper.view.SquareLayout
-                    android:id="@+id/lifePostcode"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="0dp"
-                    android:background="@drawable/selector_linearlayout">
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="@string/life_postcode"
                         android:gravity="center"/>
                 </com.wjc.flyinghelper.view.SquareLayout>
 

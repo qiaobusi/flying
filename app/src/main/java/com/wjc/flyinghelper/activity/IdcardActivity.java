@@ -1,6 +1,5 @@
-package com.wjc.flyinghelper;
+package com.wjc.flyinghelper.activity;
 
-import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -10,14 +9,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.appindexing.Thing;
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.mob.mobapi.API;
 import com.mob.mobapi.APICallback;
 import com.mob.mobapi.MobAPI;
 import com.mob.mobapi.apis.IDCard;
+import com.wjc.flyinghelper.R;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -29,8 +25,6 @@ public class IdcardActivity extends AppCompatActivity {
     private EditText idcard;
     private TextView idcardArea, idcardBirth, idcardSex;
     private Button idcardButton;
-
-    private GoogleApiClient client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

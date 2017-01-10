@@ -5,9 +5,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.wjc.flyinghelper.LifeFragment;
+import com.wjc.flyinghelper.fragment.LifeFragment;
 import com.wjc.flyinghelper.R;
-import com.wjc.flyinghelper.SleepFragment;
+import com.wjc.flyinghelper.fragment.SleepFragment;
 
 public class ViewPagerAdapter extends FragmentPagerAdapter {
 

@@ -1,4 +1,4 @@
-package com.wjc.flyinghelper;
+package com.wjc.flyinghelper.fragment;
 
 
 import android.app.Activity;
@@ -11,6 +11,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.wjc.flyinghelper.R;
+import com.wjc.flyinghelper.activity.EnvironmentActivity;
+import com.wjc.flyinghelper.activity.IdcardActivity;
+import com.wjc.flyinghelper.activity.MobileActivity;
 import com.wjc.flyinghelper.view.SquareLayout;
 
 
@@ -20,8 +24,7 @@ public class LifeFragment extends Fragment {
 
     private View view;
 
-    private SquareLayout lifeWeather, lifeEnvironment, lifeExpress, lifePostcode;
-    private SquareLayout lifeMobile, lifeIdcard;
+    private SquareLayout lifeEnvironment, lifeExpress, lifeMobile, lifeIdcard;
 
 
     public LifeFragment() {
@@ -43,35 +46,22 @@ public class LifeFragment extends Fragment {
     }
 
     private void initViewComponent() {
-        lifeWeather = (SquareLayout) view.findViewById(R.id.lifeWeather);
         lifeEnvironment = (SquareLayout) view.findViewById(R.id.lifeEnvironment);
         lifeExpress = (SquareLayout) view.findViewById(R.id.lifeExpress);
-        lifePostcode = (SquareLayout) view.findViewById(R.id.lifePostcode);
         lifeMobile = (SquareLayout) view.findViewById(R.id.lifeMobile);
         lifeIdcard = (SquareLayout) view.findViewById(R.id.lifeIdcard);
 
-        lifeWeather.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(activity, "lifeWeather", Toast.LENGTH_LONG).show();
-            }
-        });
         lifeEnvironment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(activity, "lifeEnvironment", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(activity, EnvironmentActivity.class);
+                startActivity(intent);
             }
         });
         lifeExpress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(activity, "lifeExpress", Toast.LENGTH_LONG).show();
-            }
-        });
-        lifePostcode.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(activity, "lifePostcode", Toast.LENGTH_LONG).show();
             }
         });
         lifeMobile.setOnClickListener(new View.OnClickListener() {

@@ -1,4 +1,4 @@
-package com.wjc.flyinghelper;
+package com.wjc.flyinghelper.fragment;
 
 
 import android.app.Activity;
@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jp.wheelview.WheelView;
+import com.wjc.flyinghelper.R;
 import com.wjc.flyinghelper.config.Config;
 import com.wjc.flyinghelper.util.WheelData;
 

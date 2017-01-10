@@ -1,4 +1,4 @@
-package com.wjc.flyinghelper;
+package com.wjc.flyinghelper.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,6 +13,7 @@ import com.mob.mobapi.API;
 import com.mob.mobapi.APICallback;
 import com.mob.mobapi.MobAPI;
 import com.mob.mobapi.apis.Mobile;
+import com.wjc.flyinghelper.R;
 
 import java.util.HashMap;
 import java.util.Map;

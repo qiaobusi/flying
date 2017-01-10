@@ -16,15 +16,14 @@
     <string name="set_success">设置成功</string>
 
     <!-- fragment_life -->
-    <string name="life_weather">天气预报</string>
     <string name="life_environment">空气质量</string>
     <string name="life_express">快递查询</string>
-    <string name="life_postcode">邮编查询</string>
     <string name="life_mobile">手机归属地</string>
     <string name="life_idcard">身份证查询</string>
 
-    <!-- activity_idcard -->
-    <string name="aaa">身份证号码</string>
+    <!-- activity_environment -->
+    <string name="environment_address">选择地址</string>
+    <string name="environment_default_address">北京-北京-东城</string>
 
     <!-- activity_mobile -->
     <string name="mobile">手机号码</string>
