@@ -5,6 +5,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -43,7 +44,7 @@ public class EnvironmentActivity extends AppCompatActivity {
 
     private ArrayList<String> provinceList, cityList, districtList;
 
-    private InputStream inputStream;
+    private String json = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +77,27 @@ public class EnvironmentActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 provinceList = getProvinceFromJson();
+
+                if (provinceList.size() > 0) {
+                    for (int i = 0; i < provinceList.size(); i++) {
+                        Log.i("province", provinceList.get(i));
+                    }
+                } else {
+                    Log.i("province", "100");
+                }
+
+
                 cityList = getCityFromJson(provinceList.get(0));
+
+                if (cityList.size() > 0) {
+                    for (int i = 0; i < provinceList.size(); i++) {
+                        Log.i("city", provinceList.get(i));
+                    }
+                } else {
+                    Log.i("city", "200");
+                }
+
+
                 districtList = getDistrictFromJson(provinceList.get(0), cityList.get(0));
 
                 environmentDialogView = LayoutInflater.from(EnvironmentActivity.this).inflate(R.layout.dialog_environment, null);
@@ -160,7 +181,15 @@ public class EnvironmentActivity extends AppCompatActivity {
 
     private void initJson() {
         try {
-            inputStream = getAssets().open("environment.json");
+            InputStream inputStream = getAssets().open("environment.json");
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+
+            StringBuilder stringBuilder = new StringBuilder();
+            String line = null;
+            while ((line = bufferedReader.readLine()) != null) {
+                stringBuilder.append(line);
+            }
+            json = stringBuilder.toString();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -170,27 +199,14 @@ public class EnvironmentActivity extends AppCompatActivity {
         provinceList.clear();
 
         try {
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-
-            StringBuilder stringBuilder = new StringBuilder();
-            String line = null;
-            while ((line = bufferedReader.readLine()) != null) {
-                stringBuilder.append(line);
+            JSONObject jsonObject = new JSONObject(json);
+            JSONArray provinceArray = jsonObject.getJSONArray("result");
+            for (int i = 0; i < provinceArray.length(); i++) {
+                JSONObject provinceObject = provinceArray.getJSONObject(i);
+                String province = provinceObject.getString("province");
+                provinceList.add(province);
             }
-            String json = stringBuilder.toString();
-
-            try {
-                JSONObject jsonObject = new JSONObject(json);
-                JSONArray provinceArray = jsonObject.getJSONArray("result");
-                for (int i = 0; i < provinceArray.length(); i++) {
-                    JSONObject provinceObject = provinceArray.getJSONObject(i);
-                    String province = provinceObject.getString("province");
-                    provinceList.add(province);
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        } catch (IOException e) {
+        } catch (JSONException e) {
             e.printStackTrace();
         }
 
@@ -201,34 +217,23 @@ public class EnvironmentActivity extends AppCompatActivity {
         cityList.clear();
 
         try {
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-
-            StringBuilder stringBuilder = new StringBuilder();
-            String line = null;
-            while ((line = bufferedReader.readLine()) != null) {
-                stringBuilder.append(line);
-            }
-            String json = stringBuilder.toString();
-
-            try {
-                JSONObject jsonObject = new JSONObject(json);
-                JSONArray provinceArray = jsonObject.getJSONArray("result");
-                for (int i = 0; i < provinceArray.length(); i++) {
-                    JSONObject provinceObject = provinceArray.getJSONObject(i);
-                    String province = provinceObject.getString("province");
-                    if (province.equals(provinceName)) {
-                        JSONArray cityArray = provinceObject.getJSONArray("city");
-                        for (int j = 0; j < cityArray.length(); j++) {
-                            JSONObject cityObject = cityArray.getJSONObject(j);
-                            String city = cityObject.getString("city");
-                            cityList.add(city);
-                        }
+            JSONObject jsonObject = new JSONObject(json);
+            JSONArray provinceArray = jsonObject.getJSONArray("result");
+            for (int i = 0; i < provinceArray.length(); i++) {
+                JSONObject provinceObject = provinceArray.getJSONObject(i);
+                String province = provinceObject.getString("province");
+                if (province.equals(provinceName)) {
+                    JSONArray cityArray = provinceObject.getJSONArray("city");
+                    for (int j = 0; j < cityArray.length(); j++) {
+                        JSONObject cityObject = cityArray.getJSONObject(j);
+                        String city = cityObject.getString("city");
+                        cityList.add(city);
                     }
+                } else {
+                    Log.i("getCityFromJson", "300");
                 }
-            } catch (JSONException e) {
-                e.printStackTrace();
             }
-        } catch (IOException e) {
+        } catch (JSONException e) {
             e.printStackTrace();
         }
 
@@ -239,41 +244,28 @@ public class EnvironmentActivity extends AppCompatActivity {
         districtList.clear();
 
         try {
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-
-            StringBuilder stringBuilder = new StringBuilder();
-            String line = null;
-            while ((line = bufferedReader.readLine()) != null) {
-                stringBuilder.append(line);
-            }
-            String json = stringBuilder.toString();
-
-            try {
-                JSONObject jsonObject = new JSONObject(json);
-                JSONArray provinceArray = jsonObject.getJSONArray("result");
-                for (int i = 0; i < provinceArray.length(); i++) {
-                    JSONObject provinceObject = provinceArray.getJSONObject(i);
-                    String province = provinceObject.getString("province");
-                    if (province.equals(provinceName)) {
-                        JSONArray cityArray = provinceObject.getJSONArray("city");
-                        for (int j = 0; j < cityArray.length(); j++) {
-                            JSONObject cityObject = cityArray.getJSONObject(j);
-                            String city = cityObject.getString("city");
-                            if (city.equals(cityName)) {
-                                JSONArray districtArray = cityObject.getJSONArray("district");
-                                for (int k = 0; k < districtArray.length(); k++) {
-                                    JSONObject districtObject = cityArray.getJSONObject(k);
-                                    String district = districtObject.getString("district");
-                                    districtList.add(district);
-                                }
+            JSONObject jsonObject = new JSONObject(json);
+            JSONArray provinceArray = jsonObject.getJSONArray("result");
+            for (int i = 0; i < provinceArray.length(); i++) {
+                JSONObject provinceObject = provinceArray.getJSONObject(i);
+                String province = provinceObject.getString("province");
+                if (province.equals(provinceName)) {
+                    JSONArray cityArray = provinceObject.getJSONArray("city");
+                    for (int j = 0; j < cityArray.length(); j++) {
+                        JSONObject cityObject = cityArray.getJSONObject(j);
+                        String city = cityObject.getString("city");
+                        if (city.equals(cityName)) {
+                            JSONArray districtArray = cityObject.getJSONArray("district");
+                            for (int k = 0; k < districtArray.length(); k++) {
+                                JSONObject districtObject = cityArray.getJSONObject(k);
+                                String district = districtObject.getString("district");
+                                districtList.add(district);
                             }
                         }
                     }
                 }
-            } catch (JSONException e) {
-                e.printStackTrace();
             }
-        } catch (IOException e) {
+        } catch (JSONException e) {
             e.printStackTrace();
         }
 
