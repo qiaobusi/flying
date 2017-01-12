@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.wjc.flyinghelper.R;
 import com.wjc.flyinghelper.activity.EnvironmentActivity;
+import com.wjc.flyinghelper.activity.ExpressActivity;
 import com.wjc.flyinghelper.activity.IdcardActivity;
 import com.wjc.flyinghelper.activity.MobileActivity;
 import com.wjc.flyinghelper.view.SquareLayout;
@@ -61,7 +62,8 @@ public class LifeFragment extends Fragment {
         lifeExpress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(activity, "lifeExpress", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(activity, ExpressActivity.class);
+                startActivity(intent);
             }
         });
         lifeMobile.setOnClickListener(new View.OnClickListener() {

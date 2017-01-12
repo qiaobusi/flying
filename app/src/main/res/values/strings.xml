@@ -23,7 +23,7 @@
 
     <!-- activity_environment -->
     <string name="environment_address">选择地址</string>
-    <string name="environment_default_address">北京-北京-东城</string>
+    <string name="environment_default_address">北京-北京-北京</string>
 
     <!-- activity_mobile -->
     <string name="mobile">手机号码</string>

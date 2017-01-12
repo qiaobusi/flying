@@ -1,17 +1,17 @@
 package com.wjc.flyinghelper.activity;
 
 import android.content.DialogInterface;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.jp.wheelview.WheelView;
 import com.mob.mobapi.API;
@@ -29,6 +29,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 import static com.mob.tools.utils.R.forceCast;
@@ -45,6 +46,14 @@ public class EnvironmentActivity extends AppCompatActivity {
     private ArrayList<String> provinceList, cityList, districtList;
 
     private String json = null;
+
+    private Handler handler;
+
+    private static final int INIT_CITY = 1;
+    private static final int INIT_DISTRICT = 2;
+    private static final String SEPARATOR = "-";
+
+    private TextView environmentResult;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,45 +79,39 @@ public class EnvironmentActivity extends AppCompatActivity {
 
         environmentLayout = (LinearLayout) findViewById(R.id.environmentLayout);
         environmentAddress = (TextView) findViewById(R.id.environmentAddress);
+        environmentResult = (TextView) findViewById(R.id.environmentResult);
 
         environmentButton = (Button) findViewById(R.id.environmentButton);
 
         environmentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                provinceList = getProvinceFromJson();
-
-                if (provinceList.size() > 0) {
-                    for (int i = 0; i < provinceList.size(); i++) {
-                        Log.i("province", provinceList.get(i));
-                    }
-                } else {
-                    Log.i("province", "100");
-                }
-
-
-                cityList = getCityFromJson(provinceList.get(0));
-
-                if (cityList.size() > 0) {
-                    for (int i = 0; i < provinceList.size(); i++) {
-                        Log.i("city", provinceList.get(i));
-                    }
-                } else {
-                    Log.i("city", "200");
-                }
-
-
-                districtList = getDistrictFromJson(provinceList.get(0), cityList.get(0));
+                getProvinceFromJson();
+                getCityFromJson(provinceList.get(0));
+                getDistrictFromJson(provinceList.get(0), cityList.get(0));
 
                 environmentDialogView = LayoutInflater.from(EnvironmentActivity.this).inflate(R.layout.dialog_environment, null);
                 environmentProvince = (WheelView) environmentDialogView.findViewById(R.id.environmentProvince);
                 environmentCity = (WheelView) environmentDialogView.findViewById(R.id.environmentCity);
                 environmentDistrict = (WheelView) environmentDialogView.findViewById(R.id.environmentDistrict);
+
+                environmentProvince.setData(provinceList);
+                environmentCity.setData(cityList);
+                environmentDistrict.setData(districtList);
+
+                environmentProvince.setDefault(0);
+                environmentCity.setDefault(0);
+                environmentDistrict.setDefault(0);
+
                 environmentProvince.setOnSelectListener(new WheelView.OnSelectListener() {
                     @Override
                     public void endSelect(int id, String text) {
-                        cityList = getCityFromJson(text);
-                        environmentCity.setData(cityList);
+                        getCityFromJson(text);
+
+                        Message message = new Message();
+                        message.what = INIT_CITY;
+
+                        handler.sendMessage(message);
                     }
 
                     @Override
@@ -119,8 +122,13 @@ public class EnvironmentActivity extends AppCompatActivity {
                 environmentCity.setOnSelectListener(new WheelView.OnSelectListener() {
                     @Override
                     public void endSelect(int id, String text) {
-                        districtList = getCityFromJson(text);
-                        environmentDistrict.setData(districtList);
+                        String provinceText = environmentProvince.getSelectedText();
+                        getDistrictFromJson(provinceText, text);
+
+                        Message message = new Message();
+                        message.what = INIT_DISTRICT;
+
+                        handler.sendMessage(message);
                     }
 
                     @Override
@@ -129,43 +137,47 @@ public class EnvironmentActivity extends AppCompatActivity {
                     }
                 });
 
-                environmentProvince.setData(provinceList);
-                environmentCity.setData(cityList);
-                environmentDistrict.setData(districtList);
-
                 AlertDialog.Builder builder = new AlertDialog.Builder(EnvironmentActivity.this);
                 builder.setTitle(R.string.environment_address);
-                builder.setView(R.layout.dialog_am);
+                builder.setView(environmentDialogView);
                 builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        String province = environmentProvince.getSelectedText();
-                        String city = environmentCity.getSelectedText();
-
-                        String address = province + "-" + city;
-                        environmentAddress.setText(address);
                     }
                 });
                 builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        String province = environmentProvince.getSelectedText();
+                        String city = environmentCity.getSelectedText();
+                        String district = environmentCity.getSelectedText();
 
+                        String address = province + SEPARATOR + city + SEPARATOR + district;
+
+                        environmentAddress.setText(address);
                     }
                 });
                 builder.show();
-
             }
         });
         environmentButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                changeButtonStatus(0);
+
                 String address = environmentAddress.getText().toString();
+                String[] addressArray = address.split(SEPARATOR);
 
                 Environment api = forceCast(MobAPI.getAPI(Environment.NAME));
-                api.query(environmentAddress.getText().toString().trim(), null, new APICallback() {
+                api.query(addressArray[2], addressArray[0], new APICallback() {
                     @Override
                     public void onSuccess(API api, int i, Map<String, Object> map) {
-                        Toast.makeText(EnvironmentActivity.this, "ok", Toast.LENGTH_LONG).show();
+                        ArrayList<HashMap<String, Object>> list = (ArrayList<HashMap<String, Object>>) map.get("result");
+                        HashMap<String, Object> data = list.get(0);
+
+                        updateEnvironment(data);
+
+                        changeButtonStatus(1);
                     }
 
                     @Override
@@ -176,6 +188,25 @@ public class EnvironmentActivity extends AppCompatActivity {
 
             }
         });
+
+        handler = new Handler() {
+            public void handleMessage(Message message) {
+                if (message.what == INIT_CITY) {
+                    environmentCity.refreshData(cityList);
+                    environmentCity.setDefault(0);
+
+                    String province = environmentProvince.getSelectedText();
+                    String city = environmentCity.getSelectedText();
+                    getDistrictFromJson(province, city);
+
+                    environmentDistrict.refreshData(districtList);
+                    environmentDistrict.setDefault(0);
+                } else if (message.what == INIT_DISTRICT) {
+                    environmentDistrict.refreshData(districtList);
+                    environmentDistrict.setDefault(0);
+                }
+            }
+        };
 
     }
 
@@ -195,7 +226,7 @@ public class EnvironmentActivity extends AppCompatActivity {
         }
     }
 
-    private ArrayList<String> getProvinceFromJson() {
+    private void getProvinceFromJson() {
         provinceList.clear();
 
         try {
@@ -209,11 +240,9 @@ public class EnvironmentActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-        return provinceList;
     }
 
-    private ArrayList<String> getCityFromJson(String provinceName) {
+    private void getCityFromJson(String provinceName) {
         cityList.clear();
 
         try {
@@ -229,18 +258,14 @@ public class EnvironmentActivity extends AppCompatActivity {
                         String city = cityObject.getString("city");
                         cityList.add(city);
                     }
-                } else {
-                    Log.i("getCityFromJson", "300");
                 }
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-        return cityList;
     }
 
-    private ArrayList<String> getDistrictFromJson(String provinceName, String cityName) {
+    private void getDistrictFromJson(String provinceName, String cityName) {
         districtList.clear();
 
         try {
@@ -257,7 +282,7 @@ public class EnvironmentActivity extends AppCompatActivity {
                         if (city.equals(cityName)) {
                             JSONArray districtArray = cityObject.getJSONArray("district");
                             for (int k = 0; k < districtArray.length(); k++) {
-                                JSONObject districtObject = cityArray.getJSONObject(k);
+                                JSONObject districtObject = districtArray.getJSONObject(k);
                                 String district = districtObject.getString("district");
                                 districtList.add(district);
                             }
@@ -268,8 +293,31 @@ public class EnvironmentActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
 
-        return districtList;
+    private void changeButtonStatus(int status) {
+        if (status == 0) {
+            environmentButton.setEnabled(false);
+            environmentButton.setText(R.string.querying);
+            environmentButton.setBackgroundResource(R.drawable.shape_button_disabled);
+        } else {
+            environmentButton.setEnabled(true);
+            environmentButton.setText(R.string.query);
+            environmentButton.setBackgroundResource(R.drawable.selector_button);
+        }
+    }
+
+    private void updateEnvironment(HashMap<String, Object> data) {
+        String aqi = com.mob.tools.utils.R.toString(data.get("aqi"));
+        String no2 = com.mob.tools.utils.R.toString(data.get("no2"));
+        String pm10 = com.mob.tools.utils.R.toString(data.get("pm10"));
+        String pm25 = com.mob.tools.utils.R.toString(data.get("pm25"));
+        String quality = com.mob.tools.utils.R.toString(data.get("quality"));
+        String so2 = com.mob.tools.utils.R.toString(data.get("so2"));
+        String updateTime = com.mob.tools.utils.R.toString(data.get("updateTime"));
+
+        String result = "aqi:" + aqi + " no2:" + no2 + " pm10:" + pm10 + " pm25:" + pm25 + " quality:" + quality + " so2:" + so2 + " updateTime:" + updateTime;
+        environmentResult.setText(result);
     }
 
 }
