@@ -150,7 +150,7 @@ public class EnvironmentActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         String province = environmentProvince.getSelectedText();
                         String city = environmentCity.getSelectedText();
-                        String district = environmentCity.getSelectedText();
+                        String district = environmentDistrict.getSelectedText();
 
                         String address = province + SEPARATOR + city + SEPARATOR + district;
 
