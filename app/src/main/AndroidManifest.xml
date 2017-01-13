@@ -17,14 +17,14 @@
         <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.MobileActivity" />
-        <activity android:name=".activity.IdcardActivity" />
-        <activity android:name=".activity.EnvironmentActivity" />
+        <activity android:name=".activity.SleepActivity"></activity>
+        <activity android:name=".activity.EnvironmentActivity"></activity>
         <activity android:name=".activity.ExpressActivity"></activity>
+        <activity android:name=".activity.MobileActivity"></activity>
+        <activity android:name=".activity.IdcardActivity"></activity>
 
         <receiver android:name=".receiver.PhoneStateReceiver">
             <intent-filter android:priority="1000">
@@ -37,6 +37,7 @@
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
             </intent-filter>
         </receiver>
+
 
     </application>
 

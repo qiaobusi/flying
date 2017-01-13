@@ -9,24 +9,22 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.wjc.flyinghelper.R;
 import com.wjc.flyinghelper.activity.EnvironmentActivity;
 import com.wjc.flyinghelper.activity.ExpressActivity;
 import com.wjc.flyinghelper.activity.IdcardActivity;
 import com.wjc.flyinghelper.activity.MobileActivity;
+import com.wjc.flyinghelper.activity.SleepActivity;
 import com.wjc.flyinghelper.view.SquareLayout;
 
 
 public class LifeFragment extends Fragment {
 
     private Activity activity;
-
     private View view;
 
-    private SquareLayout lifeEnvironment, lifeExpress, lifeMobile, lifeIdcard;
-
+    private SquareLayout lifeSleep, lifeEnvironment, lifeExpress, lifeMobile, lifeIdcard;
 
     public LifeFragment() {
     }
@@ -47,11 +45,19 @@ public class LifeFragment extends Fragment {
     }
 
     private void initViewComponent() {
+        lifeSleep = (SquareLayout) view.findViewById(R.id.lifeSleep);
         lifeEnvironment = (SquareLayout) view.findViewById(R.id.lifeEnvironment);
         lifeExpress = (SquareLayout) view.findViewById(R.id.lifeExpress);
         lifeMobile = (SquareLayout) view.findViewById(R.id.lifeMobile);
         lifeIdcard = (SquareLayout) view.findViewById(R.id.lifeIdcard);
 
+        lifeSleep.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(activity, SleepActivity.class);
+                startActivity(intent);
+            }
+        });
         lifeEnvironment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -1,18 +1,14 @@
-package com.wjc.flyinghelper.fragment;
+package com.wjc.flyinghelper.activity;
 
-
-import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.v7.widget.SwitchCompat;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -25,12 +21,7 @@ import com.wjc.flyinghelper.util.WheelData;
 
 import java.util.ArrayList;
 
-
-public class SleepFragment extends Fragment {
-
-    private Activity activity;
-
-    private View view;
+public class SleepActivity extends AppCompatActivity {
 
     private LinearLayout amTimeLinearLayout, pmTimeLinearLayout, switchCompatLinearLayout;
     private TextView amTimeTextView, pmTimeTextView;
@@ -46,34 +37,24 @@ public class SleepFragment extends Fragment {
     private String amTimeWheel = "";
     private String pmTimeWheel = "";
 
-    public SleepFragment() {
-    }
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_sleep, container, false);
-        return view;
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-        activity = getActivity();
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_sleep);
 
         initViewComponent();
         initTimeValue();
     }
 
     private void initViewComponent() {
-        amTimeLinearLayout = (LinearLayout) view.findViewById(R.id.amTimeLinearLayout);
-        pmTimeLinearLayout = (LinearLayout) view.findViewById(R.id.pmTimeLinearLayout);
-        switchCompatLinearLayout = (LinearLayout) view.findViewById(R.id.switchCompatLinearLayout);
+        amTimeLinearLayout = (LinearLayout) findViewById(R.id.amTimeLinearLayout);
+        pmTimeLinearLayout = (LinearLayout) findViewById(R.id.pmTimeLinearLayout);
+        switchCompatLinearLayout = (LinearLayout) findViewById(R.id.switchCompatLinearLayout);
 
-        amTimeTextView = (TextView) view.findViewById(R.id.amTimeTextView);
-        pmTimeTextView = (TextView) view.findViewById(R.id.pmTimeTextView);
+        amTimeTextView = (TextView) findViewById(R.id.amTimeTextView);
+        pmTimeTextView = (TextView) findViewById(R.id.pmTimeTextView);
 
-        switchCompat = (SwitchCompat) view.findViewById(R.id.switchCompat);
+        switchCompat = (SwitchCompat) findViewById(R.id.switchCompat);
 
         hourList = new ArrayList<String>();
         for (int i = 0; i < hours.length; i++) {
@@ -85,12 +66,12 @@ public class SleepFragment extends Fragment {
             minuteList.add(minutes[i]);
         }
 
-        button = (Button) view.findViewById(R.id.button);
+        button = (Button) findViewById(R.id.button);
 
         amTimeLinearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                amDialogView = LayoutInflater.from(activity).inflate(R.layout.dialog_am, null);
+                amDialogView = LayoutInflater.from(SleepActivity.this).inflate(R.layout.dialog_am, null);
                 amHour = (WheelView) amDialogView.findViewById(R.id.amHour);
                 amMinute = (WheelView) amDialogView.findViewById(R.id.amMinute);
                 amHour.setData(hourList);
@@ -105,7 +86,7 @@ public class SleepFragment extends Fragment {
                 amHour.setDefault(amTimeHourIndex);
                 amMinute.setDefault(amTimeMinuteIndex);
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+                AlertDialog.Builder builder = new AlertDialog.Builder(SleepActivity.this);
                 builder.setTitle(R.string.am_time);
                 builder.setView(amDialogView);
                 builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
@@ -130,7 +111,7 @@ public class SleepFragment extends Fragment {
         pmTimeLinearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                pmDialogView = LayoutInflater.from(activity).inflate(R.layout.dialog_pm, null);
+                pmDialogView = LayoutInflater.from(SleepActivity.this).inflate(R.layout.dialog_pm, null);
                 pmHour = (WheelView) pmDialogView.findViewById(R.id.pmHour);
                 pmMinute = (WheelView) pmDialogView.findViewById(R.id.pmMinute);
                 pmHour.setData(hourList);
@@ -145,7 +126,7 @@ public class SleepFragment extends Fragment {
                 pmHour.setDefault(pmTimeHourIndex);
                 pmMinute.setDefault(pmTimeMinuteIndex);
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+                AlertDialog.Builder builder = new AlertDialog.Builder(SleepActivity.this);
                 builder.setTitle(R.string.pm_time);
                 builder.setView(pmDialogView);
                 builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
@@ -189,7 +170,7 @@ public class SleepFragment extends Fragment {
                     switchText = 1;
                 }
 
-                SharedPreferences sharedPreferences = activity.getSharedPreferences(Config.name, Context.MODE_PRIVATE);
+                SharedPreferences sharedPreferences = getSharedPreferences(Config.name, Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
 
                 editor.putString(Config.amTime, amTime);
@@ -198,14 +179,14 @@ public class SleepFragment extends Fragment {
 
                 editor.commit();
 
-                Toast.makeText(activity, R.string.set_success, Toast.LENGTH_SHORT).show();
+                Toast.makeText(SleepActivity.this, R.string.set_success, Toast.LENGTH_SHORT).show();
             }
         });
 
     }
 
     private void initTimeValue() {
-        SharedPreferences sharedPreferences = activity.getSharedPreferences(Config.name, Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences(Config.name, Context.MODE_PRIVATE);
 
         String amTime = sharedPreferences.getString(Config.amTime, "");
         String pmTime = sharedPreferences.getString(Config.pmTime, "");
@@ -224,7 +205,5 @@ public class SleepFragment extends Fragment {
         }
 
     }
-
-
 
 }
