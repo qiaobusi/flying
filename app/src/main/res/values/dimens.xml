@@ -10,7 +10,7 @@
     <dimen name="edittext_margin_top">10dp</dimen> <!-- no use -->
     <dimen name="button_margin_top">20dp</dimen>
     <dimen name="button_radius">5dp</dimen>
-    <dimen name="gridview_spacing">5dp</dimen>
+    <dimen name="gridview_spacing">1dp</dimen>
 
     <dimen name="text_size">16sp</dimen>
     <dimen name="tab_text_size">16sp</dimen>
