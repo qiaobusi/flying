@@ -1,0 +1,64 @@
+package com.wjc.flyinghelper.adapter;
+
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.TextView;
+
+import com.wjc.flyinghelper.R;
+
+import java.util.ArrayList;
+
+public class LifeGridViewAdapter extends BaseAdapter {
+
+    private Context context;
+    private ArrayList<String> arrayList;
+
+    public LifeGridViewAdapter(Context context, ArrayList<String> arrayList) {
+        this.context = context;
+        this.arrayList = arrayList;
+    }
+
+    @Override
+    public int getCount() {
+        return arrayList.size();
+    }
+
+    @Override
+    public Object getItem(int i) {
+        return arrayList.get(i);
+    }
+
+    @Override
+    public long getItemId(int i) {
+        return i;
+    }
+
+    @Override
+    public View getView(int i, View view, ViewGroup viewGroup) {
+        ViewHolder viewHolder = null;
+
+        if (view == null) {
+            view = LayoutInflater.from(context).inflate(R.layout.item_life_fragment, null);
+
+            viewHolder = new ViewHolder();
+            viewHolder.lifeCardName = (TextView) view.findViewById(R.id.lifeCardName);
+
+            view.setTag(viewHolder);
+        } else {
+            viewHolder = (ViewHolder) view.getTag();
+        }
+
+        TextView lifeCardName = viewHolder.lifeCardName;
+        lifeCardName.setText(arrayList.get(i));
+
+        return view;
+    }
+
+    private class ViewHolder {
+        TextView lifeCardName;
+    }
+
+}

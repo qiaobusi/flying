@@ -9,6 +9,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.GridView;;
 
 import com.wjc.flyinghelper.R;
 import com.wjc.flyinghelper.activity.EnvironmentActivity;
@@ -16,7 +18,9 @@ import com.wjc.flyinghelper.activity.ExpressActivity;
 import com.wjc.flyinghelper.activity.IdcardActivity;
 import com.wjc.flyinghelper.activity.MobileActivity;
 import com.wjc.flyinghelper.activity.SleepActivity;
-import com.wjc.flyinghelper.view.SquareLayout;
+import com.wjc.flyinghelper.adapter.LifeGridViewAdapter;
+
+import java.util.ArrayList;
 
 
 public class LifeFragment extends Fragment {
@@ -24,7 +28,14 @@ public class LifeFragment extends Fragment {
     private Activity activity;
     private View view;
 
-    private SquareLayout lifeSleep, lifeEnvironment, lifeExpress, lifeMobile, lifeIdcard;
+    private GridView lifeGridView;
+    private LifeGridViewAdapter adapter;
+
+    private int[] card = {
+            R.string.life_sleep, R.string.life_environment, R.string.life_express,
+            R.string.life_mobile, R.string.life_idcard,
+    };
+    private ArrayList<String> arrayList;
 
     public LifeFragment() {
     }
@@ -45,48 +56,44 @@ public class LifeFragment extends Fragment {
     }
 
     private void initViewComponent() {
-        lifeSleep = (SquareLayout) view.findViewById(R.id.lifeSleep);
-        lifeEnvironment = (SquareLayout) view.findViewById(R.id.lifeEnvironment);
-        lifeExpress = (SquareLayout) view.findViewById(R.id.lifeExpress);
-        lifeMobile = (SquareLayout) view.findViewById(R.id.lifeMobile);
-        lifeIdcard = (SquareLayout) view.findViewById(R.id.lifeIdcard);
+        arrayList = new ArrayList<String>();
+        for (int i = 0; i < card.length; i++) {
+            arrayList.add(getText(card[i]).toString());
+        }
 
-        lifeSleep.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(activity, SleepActivity.class);
-                startActivity(intent);
-            }
-        });
-        lifeEnvironment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(activity, EnvironmentActivity.class);
-                startActivity(intent);
-            }
-        });
-        lifeExpress.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(activity, ExpressActivity.class);
-                startActivity(intent);
-            }
-        });
-        lifeMobile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(activity, MobileActivity.class);
-                startActivity(intent);
-            }
-        });
-        lifeIdcard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(activity, IdcardActivity.class);
-                startActivity(intent);
-            }
-        });
+        adapter = new LifeGridViewAdapter(activity, arrayList);
 
+        lifeGridView = (GridView) view.findViewById(R.id.lifeGridView);
+        lifeGridView.setAdapter(adapter);
+        lifeGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent;
+
+                switch (i) {
+                    case 0 :
+                        intent = new Intent(activity, SleepActivity.class);
+                        startActivity(intent);
+                        break;
+                    case 1 :
+                        intent = new Intent(activity, EnvironmentActivity.class);
+                        startActivity(intent);
+                        break;
+                    case 2 :
+                        intent = new Intent(activity, ExpressActivity.class);
+                        startActivity(intent);
+                        break;
+                    case 3 :
+                        intent = new Intent(activity, MobileActivity.class);
+                        startActivity(intent);
+                        break;
+                    case 4 :
+                        intent = new Intent(activity, IdcardActivity.class);
+                        startActivity(intent);
+                        break;
+                }
+            }
+        });
 
     }
 
