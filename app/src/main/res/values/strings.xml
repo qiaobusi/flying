@@ -1,6 +1,17 @@
 <resources>
     <string name="app_name">生活助手</string>
 
+    <!-- icon_font -->
+    <string name="icon_back">&#xe697;</string>
+    <string name="icon_search">&#xe6ac;</string>
+    <string name="icon_auto">&#xe6e3;</string>
+    <string name="icon_environment">&#xe707;</string>
+    <string name="icon_express">&#xe709;</string>
+    <string name="icon_sleep">&#xe70e;</string>
+    <string name="icon_mobile">&#xe72a;</string>
+    <string name="icon_weather">&#xe635;</string>
+    <string name="icon_idcard">&#xe753;</string>
+
     <!-- activity_main -->
     <string name="tab_life">生活</string>
     <string name="tab_car">挪车</string>

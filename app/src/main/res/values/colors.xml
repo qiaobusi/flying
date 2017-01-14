@@ -6,6 +6,7 @@
 
     <!-- common -->
     <color name="colorWhite">#FFFFFF</color>
+    <color name="colorIconBg">#36C198</color>
     <color name="colorWindow">#ECEDF1</color>
     <color name="colorButton">#FF5722</color>
     <color name="colorButtonDisabled">#BDBDBD</color>
