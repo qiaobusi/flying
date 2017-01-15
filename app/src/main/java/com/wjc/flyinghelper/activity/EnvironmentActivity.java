@@ -1,17 +1,19 @@
 package com.wjc.flyinghelper.activity;
 
 import android.content.DialogInterface;
+import android.content.res.ColorStateList;
 import android.os.Handler;
 import android.os.Message;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.jp.wheelview.WheelView;
 import com.mob.mobapi.API;
@@ -38,7 +40,7 @@ public class EnvironmentActivity extends AppCompatActivity {
 
     private LinearLayout environmentLayout;
     private TextView environmentAddress;
-    private Button environmentButton;
+    private FloatingActionButton environmentSearch;
 
     private View environmentDialogView;
     private WheelView environmentProvince, environmentCity, environmentDistrict;
@@ -81,7 +83,7 @@ public class EnvironmentActivity extends AppCompatActivity {
         environmentAddress = (TextView) findViewById(R.id.environmentAddress);
         environmentResult = (TextView) findViewById(R.id.environmentResult);
 
-        environmentButton = (Button) findViewById(R.id.environmentButton);
+        environmentSearch = (FloatingActionButton)  findViewById(R.id.environmentSearch);
 
         environmentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -160,10 +162,11 @@ public class EnvironmentActivity extends AppCompatActivity {
                 builder.show();
             }
         });
-        environmentButton.setOnClickListener(new View.OnClickListener() {
+
+        environmentSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                changeButtonStatus(0);
+                changeFabStatus(0);
 
                 String address = environmentAddress.getText().toString();
                 String[] addressArray = address.split(SEPARATOR);
@@ -177,15 +180,16 @@ public class EnvironmentActivity extends AppCompatActivity {
 
                         updateEnvironment(data);
 
-                        changeButtonStatus(1);
+                        changeFabStatus(1);
                     }
 
                     @Override
                     public void onError(API api, int i, Throwable throwable) {
+                        Toast.makeText(EnvironmentActivity.this, R.string.query_error, Toast.LENGTH_LONG).show();
 
+                        changeFabStatus(1);
                     }
                 });
-
             }
         });
 
@@ -295,15 +299,13 @@ public class EnvironmentActivity extends AppCompatActivity {
         }
     }
 
-    private void changeButtonStatus(int status) {
+    private void changeFabStatus(int status) {
         if (status == 0) {
-            environmentButton.setEnabled(false);
-            environmentButton.setText(R.string.querying);
-            environmentButton.setBackgroundResource(R.drawable.shape_button_disabled);
+            environmentSearch.setEnabled(false);
+            environmentSearch.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorButtonDisabled)));
         } else {
-            environmentButton.setEnabled(true);
-            environmentButton.setText(R.string.query);
-            environmentButton.setBackgroundResource(R.drawable.selector_button);
+            environmentSearch.setEnabled(true);
+            environmentSearch.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorButton)));
         }
     }
 

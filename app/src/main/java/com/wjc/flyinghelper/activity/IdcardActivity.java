@@ -1,10 +1,11 @@
 package com.wjc.flyinghelper.activity;
 
+import android.content.res.ColorStateList;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,7 +25,7 @@ public class IdcardActivity extends AppCompatActivity {
 
     private EditText idcard;
     private TextView idcardArea, idcardBirth, idcardSex;
-    private Button idcardButton;
+    private FloatingActionButton idcardSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,9 +49,9 @@ public class IdcardActivity extends AppCompatActivity {
         idcardBirth = (TextView) findViewById(R.id.idcardBirth);
         idcardSex = (TextView) findViewById(R.id.idcardSex);
 
-        idcardButton = (Button) findViewById(R.id.idcardButton);
+        idcardSearch = (FloatingActionButton) findViewById(R.id.idcardSearch);
 
-        idcardButton.setOnClickListener(new View.OnClickListener() {
+        idcardSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String idcardText = idcard.getText().toString().trim();
@@ -58,7 +59,7 @@ public class IdcardActivity extends AppCompatActivity {
                     return;
                 }
 
-                changeButtonStatus(0);
+                changeFabStatus(0);
 
                 IDCard api = forceCast(MobAPI.getAPI(IDCard.NAME));
                 api.queryIDCard(idcardText, new APICallback() {
@@ -80,31 +81,28 @@ public class IdcardActivity extends AppCompatActivity {
                             idcardSex.setVisibility(View.VISIBLE);
                         }
 
-                        changeButtonStatus(1);
+                        changeFabStatus(1);
                     }
 
                     @Override
                     public void onError(API api, int i, Throwable throwable) {
                         Toast.makeText(IdcardActivity.this, R.string.query_error, Toast.LENGTH_LONG).show();
 
-                        changeButtonStatus(1);
+                        changeFabStatus(1);
                     }
                 });
-
             }
         });
 
     }
 
-    private void changeButtonStatus(int status) {
+    private void changeFabStatus(int status) {
         if (status == 0) {
-            idcardButton.setEnabled(false);
-            idcardButton.setText(R.string.querying);
-            idcardButton.setBackgroundResource(R.drawable.shape_button_disabled);
+            idcardSearch.setEnabled(false);
+            idcardSearch.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorButtonDisabled)));
         } else {
-            idcardButton.setEnabled(true);
-            idcardButton.setText(R.string.query);
-            idcardButton.setBackgroundResource(R.drawable.selector_button);
+            idcardSearch.setEnabled(true);
+            idcardSearch.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorButton)));
         }
     }
 

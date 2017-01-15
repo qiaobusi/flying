@@ -3,6 +3,7 @@ package com.wjc.flyinghelper.activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,7 +11,6 @@ import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,7 +29,7 @@ public class SleepActivity extends AppCompatActivity {
     private SwitchCompat switchCompat;
     private View amDialogView, pmDialogView;
     private WheelView amHour, amMinute, pmHour, pmMinute;
-    private Button button;
+    private FloatingActionButton sleepSave;
 
     private String[] hours = {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"};
     private String[] minutes = {"00", "05", "10", "15", "20", "25", "30", "35", "40", "45", "50", "55"};
@@ -75,7 +75,7 @@ public class SleepActivity extends AppCompatActivity {
             minuteList.add(minutes[i]);
         }
 
-        button = (Button) findViewById(R.id.button);
+        sleepSave = (FloatingActionButton) findViewById(R.id.sleepSave);
 
         amTimeLinearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -168,7 +168,7 @@ public class SleepActivity extends AppCompatActivity {
             }
         });
 
-        button.setOnClickListener(new View.OnClickListener() {
+        sleepSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String amTime = amTimeTextView.getText().toString();

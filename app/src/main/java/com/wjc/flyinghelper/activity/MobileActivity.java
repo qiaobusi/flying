@@ -1,5 +1,7 @@
 package com.wjc.flyinghelper.activity;
 
+import android.content.res.ColorStateList;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -22,7 +24,7 @@ public class MobileActivity extends AppCompatActivity {
 
     private EditText mobile;
     private TextView mobileResult;
-    private Button mobileButton;
+    private FloatingActionButton mobileSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,9 +45,10 @@ public class MobileActivity extends AppCompatActivity {
     private void initViewComponent() {
         mobile = (EditText) findViewById(R.id.mobile);
         mobileResult = (TextView) findViewById(R.id.mobileResult);
-        mobileButton = (Button) findViewById(R.id.mobileButton);
 
-        mobileButton.setOnClickListener(new View.OnClickListener() {
+        mobileSearch = (FloatingActionButton) findViewById(R.id.mobileSearch);
+
+        mobileSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String mobileText = mobile.getText().toString().trim();
@@ -53,7 +56,7 @@ public class MobileActivity extends AppCompatActivity {
                     return;
                 }
 
-                changeButtonStatus(0);
+                changeFabStatus(0);
 
                 Mobile api = (Mobile) MobAPI.getAPI(Mobile.NAME);
                 api.phoneNumberToAddress(mobileText, new APICallback() {
@@ -73,31 +76,28 @@ public class MobileActivity extends AppCompatActivity {
                             mobileResult.setVisibility(View.VISIBLE);
                         }
 
-                        changeButtonStatus(1);
+                        changeFabStatus(1);
                     }
 
                     @Override
                     public void onError(API api, int i, Throwable throwable) {
                         Toast.makeText(MobileActivity.this, R.string.query_error, Toast.LENGTH_LONG).show();
 
-                        changeButtonStatus(1);
+                        changeFabStatus(1);
                     }
                 });
-
             }
         });
 
     }
 
-    private void changeButtonStatus(int status) {
+    private void changeFabStatus(int status) {
         if (status == 0) {
-            mobileButton.setEnabled(false);
-            mobileButton.setText(R.string.querying);
-            mobileButton.setBackgroundResource(R.drawable.shape_button_disabled);
+            mobileSearch.setEnabled(false);
+            mobileSearch.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorButtonDisabled)));
         } else {
-            mobileButton.setEnabled(true);
-            mobileButton.setText(R.string.query);
-            mobileButton.setBackgroundResource(R.drawable.selector_button);
+            mobileSearch.setEnabled(true);
+            mobileSearch.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorButton)));
         }
     }
 

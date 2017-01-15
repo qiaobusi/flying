@@ -16,7 +16,14 @@
     <string name="tab_life">生活</string>
     <string name="tab_car">挪车</string>
 
-    <!-- fragment_sleep -->
+    <!-- fragment_life -->
+    <string name="life_sleep">睡眠助手</string>
+    <string name="life_environment">空气质量</string>
+    <string name="life_express">快递查询</string>
+    <string name="life_mobile">手机归属地</string>
+    <string name="life_idcard">身份证查询</string>
+
+    <!-- activity_sleep -->
     <string name="am_time">开启时间</string>
     <string name="pm_time">关闭时间</string>
     <string name="am_time_default">22:00</string>
@@ -25,13 +32,6 @@
     <string name="cancel">取消</string>
     <string name="confirm">确认</string>
     <string name="set_success">设置成功</string>
-
-    <!-- fragment_life -->
-    <string name="life_sleep">睡眠助手</string>
-    <string name="life_environment">空气质量</string>
-    <string name="life_express">快递查询</string>
-    <string name="life_mobile">手机归属地</string>
-    <string name="life_idcard">身份证查询</string>
 
     <!-- activity_environment -->
     <string name="environment_address">选择地址</string>
