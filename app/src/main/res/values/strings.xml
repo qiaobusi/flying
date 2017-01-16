@@ -36,11 +36,16 @@
     <!-- activity_environment -->
     <string name="environment_address">选择地址</string>
     <string name="environment_default_address">北京-北京-北京</string>
+    <string name="environment_aqi">AQI</string>
+    <string name="environment_pm10">PM10</string>
+    <string name="environment_pm25">PM2.5</string>
+    <string name="environment_so2">SO2</string>
+    <string name="environment_no2">NO2</string>
+    <string name="environment_quality">空气质量</string>
+    <string name="environment_updatetime">更新时间</string>
 
     <!-- activity_mobile -->
     <string name="mobile">手机号码</string>
-    <string name="query">查询</string>
-    <string name="querying">努力查询中...</string>
     <string name="query_error">查询错误</string>
 
     <!-- activity_idcard -->

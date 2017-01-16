@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,6 +43,9 @@ public class EnvironmentActivity extends AppCompatActivity {
     private TextView environmentAddress;
     private FloatingActionButton environmentSearch;
 
+    private ScrollView environmentScrollView;
+    private TextView aqi, pm10, pm25, so2, no2, quality, updatetime;
+
     private View environmentDialogView;
     private WheelView environmentProvince, environmentCity, environmentDistrict;
 
@@ -54,8 +58,6 @@ public class EnvironmentActivity extends AppCompatActivity {
     private static final int INIT_CITY = 1;
     private static final int INIT_DISTRICT = 2;
     private static final String SEPARATOR = "-";
-
-    private TextView environmentResult;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,9 +83,17 @@ public class EnvironmentActivity extends AppCompatActivity {
 
         environmentLayout = (LinearLayout) findViewById(R.id.environmentLayout);
         environmentAddress = (TextView) findViewById(R.id.environmentAddress);
-        environmentResult = (TextView) findViewById(R.id.environmentResult);
 
         environmentSearch = (FloatingActionButton)  findViewById(R.id.environmentSearch);
+
+        environmentScrollView = (ScrollView) findViewById(R.id.environmentScrollView);
+        aqi = (TextView) findViewById(R.id.aqi);
+        pm10 = (TextView) findViewById(R.id.pm10);
+        pm25 = (TextView) findViewById(R.id.pm25);
+        so2 = (TextView) findViewById(R.id.so2);
+        no2 = (TextView) findViewById(R.id.no2);
+        quality = (TextView) findViewById(R.id.quality);
+        updatetime = (TextView) findViewById(R.id.updatetime);
 
         environmentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -310,16 +320,25 @@ public class EnvironmentActivity extends AppCompatActivity {
     }
 
     private void updateEnvironment(HashMap<String, Object> data) {
-        String aqi = com.mob.tools.utils.R.toString(data.get("aqi"));
-        String no2 = com.mob.tools.utils.R.toString(data.get("no2"));
-        String pm10 = com.mob.tools.utils.R.toString(data.get("pm10"));
-        String pm25 = com.mob.tools.utils.R.toString(data.get("pm25"));
-        String quality = com.mob.tools.utils.R.toString(data.get("quality"));
-        String so2 = com.mob.tools.utils.R.toString(data.get("so2"));
-        String updateTime = com.mob.tools.utils.R.toString(data.get("updateTime"));
+        String aqiString = com.mob.tools.utils.R.toString(data.get("aqi"));
+        String no2String = com.mob.tools.utils.R.toString(data.get("no2"));
+        String pm10String = com.mob.tools.utils.R.toString(data.get("pm10"));
+        String pm25String = com.mob.tools.utils.R.toString(data.get("pm25"));
+        String qualityString = com.mob.tools.utils.R.toString(data.get("quality"));
+        String so2String = com.mob.tools.utils.R.toString(data.get("so2"));
+        String updateTimeString = com.mob.tools.utils.R.toString(data.get("updateTime"));
 
-        String result = "aqi:" + aqi + " no2:" + no2 + " pm10:" + pm10 + " pm25:" + pm25 + " quality:" + quality + " so2:" + so2 + " updateTime:" + updateTime;
-        environmentResult.setText(result);
+        aqi.setText(aqiString);
+        pm10.setText(pm10String);
+        pm25.setText(pm25String);
+        so2.setText(so2String);
+        no2.setText(no2String);
+        quality.setText(qualityString);
+        updatetime.setText(updateTimeString);
+
+        if (environmentScrollView.getVisibility() == View.GONE) {
+            environmentScrollView.setVisibility(View.VISIBLE);
+        }
     }
 
 }
