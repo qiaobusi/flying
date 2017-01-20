@@ -2,7 +2,7 @@ package com.wjc.flyinghelper.config;
 
 
 public class Config {
-    public static String name = "com.wjc.flyinghelper";
+    public static String name = "com.wjc.flyinghelper.sleep";
     public static String amTime = "amTime";
     public static String pmTime = "pmTime";
     public static String switchCompat = "switchCompat";
@@ -13,5 +13,10 @@ public class Config {
     public static String pmMinute = "pmMinute";
 
     public static String mobKey = "1a924df054c58";
+
+    public static String userinfo = "com.wjc.flyinghelper.userinfo";
+    public static String userinfoMobile = "userinfoMobile";
+
+    public static String httpUrl = "http://www.aaa.com";
 
 }

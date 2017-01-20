@@ -14,7 +14,7 @@
 
     <!-- activity_main -->
     <string name="tab_life">生活</string>
-    <string name="tab_car">挪车</string>
+    <string name="tab_car">汽车</string>
 
     <!-- fragment_life -->
     <string name="life_sleep">睡眠助手</string>
@@ -22,6 +22,10 @@
     <string name="life_express">快递查询</string>
     <string name="life_mobile">手机归属地</string>
     <string name="life_idcard">身份证查询</string>
+
+    <!-- fragment_car -->
+    <string name="car_info">车辆信息查询</string>
+    <string name="car_ucenter">个人中心</string>
 
     <!-- activity_sleep -->
     <string name="am_time">开启时间</string>
@@ -50,6 +54,7 @@
 
     <!-- activity_idcard -->
     <string name="idcard">身份证号码</string>
+    <string name="title_activity_ucenter">UcenterActivity</string>
 
 
 </resources>

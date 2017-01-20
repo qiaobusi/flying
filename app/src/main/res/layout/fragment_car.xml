@@ -3,11 +3,58 @@
     android:layout_height="match_parent"
     android:background="@color/colorWindow">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/tab_car"
-        android:gravity="center"
-        android:textSize="@dimen/text_size"/>
+        android:orientation="vertical">
+        <LinearLayout
+            android:id="@+id/carInfo"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/input_height"
+            android:layout_marginTop="@dimen/edittext_margin_top"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/padding_left"
+            android:paddingRight="@dimen/padding_right"
+            android:background="@drawable/selector_linearlayout">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:textSize="@dimen/text_size"
+                android:text="@string/car_info"/>
+            <TextView
+                android:id="@+id/carInfoMore"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:textSize="@dimen/text_size"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/carUserinfo"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/input_height"
+            android:layout_marginTop="@dimen/line_height"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/padding_left"
+            android:paddingRight="@dimen/padding_right"
+            android:background="@drawable/selector_linearlayout">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:textSize="@dimen/text_size"
+                android:text="@string/car_ucenter"/>
+            <TextView
+                android:id="@+id/carUcenterMore"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:textSize="@dimen/text_size"/>
+        </LinearLayout>
+    </LinearLayout>
+
+
 
 </FrameLayout>
