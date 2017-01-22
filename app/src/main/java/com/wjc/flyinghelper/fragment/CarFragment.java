@@ -17,7 +17,7 @@ import android.widget.TextView;
 import com.wjc.flyinghelper.R;
 import com.wjc.flyinghelper.activity.CarinfoActivity;
 import com.wjc.flyinghelper.activity.LoginActivity;
-import com.wjc.flyinghelper.activity.UserinfoActivity;
+import com.wjc.flyinghelper.activity.UcenterActivity;
 import com.wjc.flyinghelper.config.Config;
 
 public class CarFragment extends Fragment {
@@ -55,22 +55,27 @@ public class CarFragment extends Fragment {
 
         Typeface typeface = Typeface.createFromAsset(activity.getAssets(), "iconfont.ttf");
         carInfoMore.setTypeface(typeface);
-        carInfoMore.setText(activity.getString(R.string.icon_back));
+        carInfoMore.setText(activity.getString(R.string.icon_forward));
         carUcenterMore.setTypeface(typeface);
-        carUcenterMore.setText(activity.getString(R.string.icon_back));
+        carUcenterMore.setText(activity.getString(R.string.icon_forward));
 
         carInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(activity, CarinfoActivity.class);
-                startActivity(intent);
+                if (isLogin()) {
+                    Intent intent = new Intent(activity, CarinfoActivity.class);
+                    startActivity(intent);
+                } else {
+                    Intent intent = new Intent(activity, LoginActivity.class);
+                    startActivity(intent);
+                }
             }
         });
         carUserinfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (isLogin()) {
-                    Intent intent = new Intent(activity, UserinfoActivity.class);
+                    Intent intent = new Intent(activity, UcenterActivity.class);
                     startActivity(intent);
                 } else {
                     Intent intent = new Intent(activity, LoginActivity.class);

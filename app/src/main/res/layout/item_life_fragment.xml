@@ -7,13 +7,12 @@
     android:background="@drawable/selector_linearlayout">
     <TextView
         android:id="@+id/lifeCardIcon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/grid_size"
+        android:layout_height="@dimen/grid_size"
         android:gravity="center"
         android:textSize="@dimen/icon_size"
         android:textColor="@color/colorWhite"
-        android:background="@drawable/shape_life_fragment"
-        android:padding="@dimen/gridview_padding"/>
+        android:background="@drawable/shape_life_item" />
     <TextView
         android:id="@+id/lifeCardName"
         android:layout_width="wrap_content"

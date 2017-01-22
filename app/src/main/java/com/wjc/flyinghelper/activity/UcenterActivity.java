@@ -5,11 +5,11 @@ import android.os.Bundle;
 
 import com.wjc.flyinghelper.R;
 
-public class UserinfoActivity extends AppCompatActivity {
+public class UcenterActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_userinfo);
+        setContentView(R.layout.activity_ucenter);
     }
 }

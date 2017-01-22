@@ -25,12 +25,11 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile project(':WheelView')
-    compile files('src/main/libs/mobAPI-1.0.6.jar')
-    compile files('src/main/libs/MobCommons-2016.0727.1113.jar')
-    compile files('src/main/libs/MobTools-2016.0727.1113.jar')
     compile 'com.android.support:appcompat-v7:25.0.0'
     compile 'com.android.support:design:25.0.0'
     compile 'com.android.support:support-v4:25.0.0'
-    compile 'com.google.android.gms:play-services-appindexing:9.8.0'
     testCompile 'junit:junit:4.12'
+    compile files('src/main/libs/mobAPI-1.0.6.jar')
+    compile files('src/main/libs/MobCommons-2016.0727.1113.jar')
+    compile files('src/main/libs/MobTools-2016.0727.1113.jar')
 }

@@ -1,16 +1,30 @@
 <resources>
     <string name="app_name">生活助手</string>
 
+    <!-- public -->
+    <string name="request_error">请求错误</string>
+    <string name="query_error">查询错误</string>
+
     <!-- icon_font -->
-    <string name="icon_back">&#xe697;</string>
-    <string name="icon_search">&#xe6ac;</string>
-    <string name="icon_auto">&#xe6e3;</string>
-    <string name="icon_environment">&#xe707;</string>
-    <string name="icon_express">&#xe709;</string>
-    <string name="icon_sleep">&#xe70e;</string>
-    <string name="icon_mobile">&#xe72a;</string>
-    <string name="icon_weather">&#xe635;</string>
-    <string name="icon_idcard">&#xe753;</string>
+    <string name="icon_back">&#xe609;</string>
+    <string name="icon_forward">&#xe602;</string>
+    <string name="icon_account">&#xe603;</string>
+    <string name="icon_sleep">&#xe604;</string>
+    <string name="icon_environment">&#xe608;</string>
+    <string name="icon_express">&#xe605;</string>
+    <string name="icon_mobile">&#xe606;</string>
+    <string name="icon_idcard">&#xe607;</string>
+
+    <!-- toolbar -->
+    <string name="toolbar_sleep">睡眠助手</string>
+    <string name="toolbar_environment">空气质量</string>
+    <string name="toolbar_express">快递查询</string>
+    <string name="toolbar_mobile">手机归属地</string>
+    <string name="toolbar_idcard">身份证查询</string>
+    <string name="toolbar_login">用户登录</string>
+    <string name="toolbar_register">用户注册</string>
+    <string name="toolbar_car_info">车辆信息查询</string>
+    <string name="toolbar_ucenter">用户中心</string>
 
     <!-- activity_main -->
     <string name="tab_life">生活</string>
@@ -25,7 +39,7 @@
 
     <!-- fragment_car -->
     <string name="car_info">车辆信息查询</string>
-    <string name="car_ucenter">个人中心</string>
+    <string name="car_ucenter">用户中心</string>
 
     <!-- activity_sleep -->
     <string name="am_time">开启时间</string>
@@ -48,13 +62,19 @@
     <string name="environment_quality">空气质量</string>
     <string name="environment_updatetime">更新时间</string>
 
+    <!-- activity_express -->
+    <string name="aa">aa</string>
+
     <!-- activity_mobile -->
     <string name="mobile">手机号码</string>
-    <string name="query_error">查询错误</string>
 
     <!-- activity_idcard -->
     <string name="idcard">身份证号码</string>
-    <string name="title_activity_ucenter">UcenterActivity</string>
+
+    <!-- activity_login -->
+    <string name="login_mobile">手机号码</string>
+    <string name="login_password">登录密码</string>
+    <string name="login_button">登录</string>
 
 
 </resources>

@@ -22,7 +22,7 @@ public class ExpressActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         TextView toolbarText = (TextView) toolbar.findViewById(R.id.toolbarText);
-        toolbarText.setText(R.string.life_express);
+        toolbarText.setText(R.string.toolbar_express);
     }
 
     private void initViewComponent() {

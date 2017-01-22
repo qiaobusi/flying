@@ -40,7 +40,7 @@ public class IdcardActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         TextView toolbarText = (TextView) toolbar.findViewById(R.id.toolbarText);
-        toolbarText.setText(R.string.life_idcard);
+        toolbarText.setText(R.string.toolbar_idcard);
     }
 
     private void initViewComponent() {

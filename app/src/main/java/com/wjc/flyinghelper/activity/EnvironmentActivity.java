@@ -73,7 +73,7 @@ public class EnvironmentActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         TextView toolbarText = (TextView) toolbar.findViewById(R.id.toolbarText);
-        toolbarText.setText(R.string.life_environment);
+        toolbarText.setText(R.string.toolbar_environment);
     }
 
     private void initViewComponent() {

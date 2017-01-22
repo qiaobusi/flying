@@ -28,7 +28,7 @@
         <activity android:name=".activity.IdcardActivity" />
         <activity android:name=".activity.LoginActivity" />
         <activity android:name=".activity.RegisterActivity"></activity>
-        <activity android:name=".activity.UserinfoActivity" />
+        <activity android:name=".activity.UcenterActivity" />
         <activity android:name=".activity.CarinfoActivity" />
 
         <receiver android:name=".receiver.PhoneStateReceiver">

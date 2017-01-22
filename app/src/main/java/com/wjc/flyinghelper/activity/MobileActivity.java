@@ -39,7 +39,7 @@ public class MobileActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         TextView toolbarText = (TextView) toolbar.findViewById(R.id.toolbarText);
-        toolbarText.setText(R.string.life_mobile);
+        toolbarText.setText(R.string.toolbar_mobile);
     }
 
     private void initViewComponent() {

@@ -1,5 +1,6 @@
 package com.wjc.flyinghelper.activity;
 
+import android.content.res.ColorStateList;
 import android.os.Handler;
 import android.os.Message;
 import android.support.design.widget.FloatingActionButton;
@@ -16,20 +17,25 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.wjc.flyinghelper.R;
+import com.wjc.flyinghelper.config.Config;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 public class CarinfoActivity extends AppCompatActivity {
-
     private Spinner provinceShort, a2z;
     private EditText plateNumber;
     private TextView carInfoName;
     private Button dial;
-
     private FloatingActionButton carSearch;
-
-    private ArrayList<String> provinceShortList, a2zList;
-    private ArrayAdapter provinceShortAdapter, a2zAdapter;
 
     private String[] provinceShorts = {
             "京", "津", "冀", "晋", "蒙", "辽", "吉", "黑", "沪", "苏",
@@ -42,13 +48,13 @@ public class CarinfoActivity extends AppCompatActivity {
             "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T",
             "U", "V", "W", "X", "Y", "Z"
     };
+    private ArrayList<String> provinceShortList, a2zList;
+    private ArrayAdapter provinceShortAdapter, a2zAdapter;
 
     private String provinceShortVal, a2zVal;
+    private String name, mobile;
 
     private Handler handler;
-
-    private static final int REQUEST_SUCCESS = 1;
-    private static final int REQUEST_ERROR = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +69,7 @@ public class CarinfoActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         TextView toolbarText = (TextView) toolbar.findViewById(R.id.toolbarText);
-        toolbarText.setText(R.string.car_info);
+        toolbarText.setText(R.string.toolbar_car_info);
     }
 
     private void initViewComponent() {
@@ -117,53 +123,129 @@ public class CarinfoActivity extends AppCompatActivity {
         dial.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //拨号操作，调用匿名拨号sdk
+                dialMobile(mobile);
             }
         });
 
         carSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getCarInfo();
+                String plate = plateNumber.getText().toString().trim();
+                plate = provinceShortVal + a2zVal + plate;
+
+                getCarInfo(plate);
+
+                changeFabStatus(0);
             }
         });
 
 
         handler = new Handler() {
             public void handleMessage(Message message) {
-                if (message.what == REQUEST_SUCCESS) {
+                if (message.what == Config.REQUEST_SUCCESS) {
                     Bundle bundle = message.getData();
-                    String mobile = bundle.getString("mobile", "");
-                    String name = bundle.getString("name", "");
+                    String result = bundle.getString(Config.RETURN_RESULT);
 
-                    carInfoName.setText(name);
-                } else if (message.what == REQUEST_ERROR){
+                    try {
+                        JSONObject jsonObject = new JSONObject(result);
+
+                        int status = jsonObject.getInt("status");
+                        if (status == Config.EXEC_SUCCESS) {
+                            JSONObject dataObject = jsonObject.getJSONObject("data");
+                            name = dataObject.getString("name");
+                            mobile = dataObject.getString("mobile");
+
+                            carInfoName.setText(name);
+                        } else if (status == Config.EXEC_ERROR){
+                            String info = jsonObject.getString("info");
+                            Toast.makeText(CarinfoActivity.this, info, Toast.LENGTH_LONG).show();
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                } else if (message.what == Config.REQUEST_ERROR){
                     Toast.makeText(CarinfoActivity.this, R.string.query_error, Toast.LENGTH_LONG).show();
                 }
+
+                changeFabStatus(1);
             }
         };
 
     }
 
-    private void getCarInfo() {
+    private void getCarInfo(final String plateNumber) {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                //网络请求获取车主信息
-                //此处暂时省略一部分代码
 
-                Bundle bundle = new Bundle();
-                bundle.putString("mobile", "15639713083");
-                bundle.putString("name", "王先生");
+                String requestUrl = Config.httpUrl + "/web/api/getcarinfo";
 
-                Message message = new Message();
-                message.setData(bundle);
-                message.what = REQUEST_SUCCESS;
+                try {
+                    String data = "plate_number=" + URLEncoder.encode(plateNumber, "UTF-8");
 
-                handler.sendMessage(message);
+                    URL url = new URL(requestUrl);
+                    HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+                    urlConnection.setDoInput(true);
+                    urlConnection.setDoOutput(true);
+                    urlConnection.setRequestMethod("POST");
+                    urlConnection.setConnectTimeout(10000);
+                    urlConnection.setReadTimeout(3000);
+
+                    urlConnection.connect();
+
+                    OutputStream outputStream = urlConnection.getOutputStream();
+                    outputStream.write(data.getBytes());
+                    outputStream.flush();
+                    outputStream.close();
+
+                    Message message = new Message();
+
+                    if (urlConnection.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                        InputStream inputStream = urlConnection.getInputStream();
+
+                        byte[] bytes = new byte[1024];
+                        int length = 0;
+                        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+
+                        while ((length = inputStream.read(bytes)) != -1) {
+                            byteArrayOutputStream.write(bytes, 0, length);
+                        }
+
+                        inputStream.close();
+
+                        String result = new String(byteArrayOutputStream.toByteArray());
+
+                        Bundle bundle = new Bundle();
+                        bundle.putString(Config.RETURN_RESULT, result);
+
+                        message.setData(bundle);
+                        message.what = Config.REQUEST_SUCCESS;
+                    } else {
+                        message.what = Config.REQUEST_ERROR;
+                    }
+
+                    handler.sendMessage(message);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }).start();
 
+    }
+
+    public void dialMobile(String mobile) {
+
+    }
+
+    private void changeFabStatus(int status) {
+        if (status == 0) {
+            carSearch.setEnabled(false);
+            carSearch.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorButtonDisabled)));
+        } else {
+            carSearch.setEnabled(true);
+            carSearch.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorButton)));
+        }
     }
 
 }

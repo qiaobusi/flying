@@ -52,7 +52,7 @@ public class SleepActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         TextView toolbarText = (TextView) toolbar.findViewById(R.id.toolbarText);
-        toolbarText.setText(R.string.life_sleep);
+        toolbarText.setText(R.string.toolbar_sleep);
     }
 
     private void initViewComponent() {

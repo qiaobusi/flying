@@ -23,12 +23,14 @@
                 android:id="@+id/provinceShort"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent"
+                android:spinnerMode="dialog"/>
             <Spinner
                 android:id="@+id/a2z"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent"
+                android:spinnerMode="dialog"/>
             <EditText
                 android:id="@+id/plateNumber"
                 android:layout_width="0dp"
