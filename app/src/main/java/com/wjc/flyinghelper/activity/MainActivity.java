@@ -10,6 +10,8 @@ import com.wjc.flyinghelper.R;
 import com.wjc.flyinghelper.adapter.ViewPagerAdapter;
 import com.wjc.flyinghelper.config.Config;
 
+import cn.smssdk.SMSSDK;
+
 public class MainActivity extends AppCompatActivity {
 
     private TabLayout tabLayout;
@@ -22,11 +24,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         initViewComponent();
-        initMob();
+        initMobApi();
+        initSecurityCode();
     }
 
-    private void initMob() {
-        MobAPI.initSDK(this, Config.mobKey);
+    private void initMobApi() {
+        MobAPI.initSDK(this, Config.mobApiKey);
+    }
+
+    private void initSecurityCode() {
+        SMSSDK.initSDK(MainActivity.this, Config.securityCodeKey, Config.securityCodeSecret);
     }
 
     private void initViewComponent() {

@@ -16,8 +16,8 @@
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/line_height"
             android:numColumns="2"
-            android:horizontalSpacing="@dimen/gridview_spacing"
-            android:verticalSpacing="@dimen/gridview_spacing"
+            android:horizontalSpacing="@dimen/grid_spacing"
+            android:verticalSpacing="@dimen/grid_spacing"
             android:stretchMode="columnWidth"/>
     </LinearLayout>
 

@@ -33,6 +33,7 @@ public class LoginActivity extends AppCompatActivity {
     private TextView loginLogo;
     private EditText loginMobile, loginPassword;
     private Button loginButton;
+    private TextView loginForgetPassword, loginRegister;
 
     private Handler handler;
 
@@ -57,6 +58,8 @@ public class LoginActivity extends AppCompatActivity {
         loginMobile = (EditText) findViewById(R.id.loginMobile);
         loginPassword = (EditText) findViewById(R.id.loginPassword);
         loginButton = (Button) findViewById(R.id.loginButton);
+        loginForgetPassword = (TextView) findViewById(R.id.loginForgetPassword);
+        loginRegister = (TextView) findViewById(R.id.loginRegister);
 
         Typeface typeface = Typeface.createFromAsset(getAssets(), "iconfont.ttf");
         loginLogo.setTypeface(typeface);
@@ -71,6 +74,20 @@ public class LoginActivity extends AppCompatActivity {
                 login(mobile, password);
 
                 changeButtonStatus(0);
+            }
+        });
+        loginForgetPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this, ForgetPasswordActivity.class);
+                startActivity(intent);
+            }
+        });
+        loginRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(intent);
             }
         });
 

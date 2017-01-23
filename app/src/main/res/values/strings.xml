@@ -23,6 +23,7 @@
     <string name="toolbar_idcard">身份证查询</string>
     <string name="toolbar_login">用户登录</string>
     <string name="toolbar_register">用户注册</string>
+    <string name="toolbar_forget_password">重置密码</string>
     <string name="toolbar_car_info">车辆信息查询</string>
     <string name="toolbar_ucenter">用户中心</string>
 
@@ -75,6 +76,25 @@
     <string name="login_mobile">手机号码</string>
     <string name="login_password">登录密码</string>
     <string name="login_button">登录</string>
+    <string name="login_forget_password">忘记密码</string>
+    <string name="login_register">我要注册</string>
+
+    <!-- activity_register -->
+    <string name="register_mobile">手机号码</string>
+    <string name="register_password">登录密码</string>
+    <string name="register_code">手机验证码</string>
+    <string name="register_code_button">发送验证码</string>
+    <string name="register_button">注册</string>
+
+    <!-- activity_forget_password -->
+    <string name="password_mobile">手机号码</string>
+    <string name="password_password">新密码</string>
+    <string name="password_code">手机验证码</string>
+    <string name="password_code_button">发送验证码</string>
+    <string name="password_button">重置密码</string>
+
+    <string name="code_send_success">验证码已发送</string>
+    <string name="code_verify_failed">验证码错误</string>
 
 
 </resources>

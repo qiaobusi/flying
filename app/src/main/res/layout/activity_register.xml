@@ -1,13 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_register"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.wjc.flyinghelper.activity.RegisterActivity">
+    android:orientation="vertical"
+    android:background="@color/colorWindow">
 
-</RelativeLayout>
+    <include
+        layout="@layout/toolbar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/logo_margin"
+        android:layout_marginBottom="@dimen/logo_margin">
+        <TextView
+            android:id="@+id/registerLogo"
+            android:layout_width="@dimen/logo_size"
+            android:layout_height="@dimen/logo_size"
+            android:textSize="@dimen/icon_size"
+            android:textColor="@color/colorWhite"
+            android:gravity="center"
+            android:background="@drawable/shape_login_logo"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/input_height"
+        android:paddingLeft="@dimen/padding_left"
+        android:paddingRight="@dimen/padding_right">
+        <EditText
+            android:id="@+id/registerMobile"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textSize="@dimen/text_size"
+            android:hint="@string/register_mobile"
+            android:inputType="phone"
+            android:background="@drawable/selector_edittext"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/input_height"
+        android:paddingLeft="@dimen/padding_left"
+        android:paddingRight="@dimen/padding_right"
+        android:layout_marginTop="@dimen/edittext_margin_top">
+        <EditText
+            android:id="@+id/registerPassword"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textSize="@dimen/text_size"
+            android:hint="@string/register_password"
+            android:inputType="phone"
+            android:background="@drawable/selector_edittext"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/input_height"
+        android:paddingLeft="@dimen/padding_left"
+        android:paddingRight="@dimen/padding_right"
+        android:layout_marginTop="@dimen/edittext_margin_top"
+        android:orientation="horizontal">
+        <EditText
+            android:id="@+id/registerCode"
+            android:layout_width="@dimen/dp_0"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textSize="@dimen/text_size"
+            android:hint="@string/register_code"
+            android:inputType="number"
+            android:background="@drawable/selector_edittext"/>
+        <View
+            android:layout_width="@dimen/view_width"
+            android:layout_height="match_parent"/>
+        <Button
+            android:id="@+id/registerCodeButton"
+            android:layout_width="@dimen/dp_0"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:text="@string/register_code_button"
+            android:background="@drawable/selector_button"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/text_size"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/input_height"
+        android:layout_marginTop="@dimen/button_margin_top"
+        android:paddingLeft="@dimen/padding_left"
+        android:paddingRight="@dimen/padding_right">
+        <Button
+            android:id="@+id/registerButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/register_button"
+            android:background="@drawable/selector_button"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/text_size"/>
+    </LinearLayout>
+
+</LinearLayout>

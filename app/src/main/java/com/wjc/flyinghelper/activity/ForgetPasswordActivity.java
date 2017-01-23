@@ -1,6 +1,5 @@
 package com.wjc.flyinghelper.activity;
 
-import android.graphics.Typeface;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Message;
@@ -8,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -32,11 +30,10 @@ import cn.smssdk.EventHandler;
 import cn.smssdk.SMSSDK;
 import cn.smssdk.utils.SMSLog;
 
-public class RegisterActivity extends AppCompatActivity {
+public class ForgetPasswordActivity extends AppCompatActivity {
 
-    private TextView registerLogo;
-    private EditText registerMobile, registerPassword, registerCode;
-    private Button registerCodeButton, registerButton;
+    private EditText passwordMobile, passwordPassword, passwordCode;
+    private Button passwordCodeButton, passwordButton;
 
     private CountDownTimer countDownTimer;
 
@@ -48,7 +45,7 @@ public class RegisterActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.activity_forget_password);
 
         initToolbar();
         initViewComponent();
@@ -77,65 +74,60 @@ public class RegisterActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         TextView toolbarText = (TextView) toolbar.findViewById(R.id.toolbarText);
-        toolbarText.setText(R.string.toolbar_register);
+        toolbarText.setText(R.string.toolbar_forget_password);
     }
 
     private void initViewComponent() {
-        registerLogo = (TextView) findViewById(R.id.registerLogo);
-        registerMobile = (EditText) findViewById(R.id.registerMobile);
-        registerPassword = (EditText) findViewById(R.id.registerPassword);
-        registerCode = (EditText) findViewById(R.id.registerCode);
-        registerCodeButton = (Button) findViewById(R.id.registerCodeButton);
-        registerButton = (Button) findViewById(R.id.registerButton);
-
-        Typeface typeface = Typeface.createFromAsset(getAssets(), "iconfont.ttf");
-        registerLogo.setTypeface(typeface);
-        registerLogo.setText(getString(R.string.icon_account));
+        passwordMobile = (EditText) findViewById(R.id.passwordMobile);
+        passwordPassword = (EditText) findViewById(R.id.passwordPassword);
+        passwordCode = (EditText) findViewById(R.id.passwordCode);
+        passwordCodeButton = (Button) findViewById(R.id.passwordCodeButton);
+        passwordButton = (Button) findViewById(R.id.passwordButton);
 
         countDownTimer = new CountDownTimer(second * 1000, 1000) {
             @Override
             public void onTick(long l) {
-                if (registerCodeButton.isEnabled()) {
-                    registerCodeButton.setEnabled(false);
-                    registerCodeButton.setBackgroundResource(R.drawable.shape_button_disabled);
+                if (passwordCodeButton.isEnabled()) {
+                    passwordCodeButton.setEnabled(false);
+                    passwordCodeButton.setBackgroundResource(R.drawable.shape_button_disabled);
                 }
 
                 String text = String.valueOf(l / 1000);
-                registerCodeButton.setText(text);
+                passwordCodeButton.setText(text);
             }
 
             @Override
             public void onFinish() {
-                registerCodeButton.setEnabled(true);
-                registerCodeButton.setBackgroundResource(R.drawable.selector_button);
-                registerCodeButton.setText(getString(R.string.register_code_button));
+                passwordCodeButton.setEnabled(true);
+                passwordCodeButton.setBackgroundResource(R.drawable.selector_button);
+                passwordCodeButton.setText(getString(R.string.password_code_button));
             }
         };
 
-        registerCodeButton.setOnClickListener(new View.OnClickListener() {
+        passwordCodeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String mobile = registerMobile.getText().toString().trim();
+                String mobile = passwordMobile.getText().toString().trim();
 
                 sendCode(mobile);
             }
         });
 
-        registerButton.setOnClickListener(new View.OnClickListener() {
+        passwordButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String mobile = registerMobile.getText().toString().trim();
-                String password = registerPassword.getText().toString();
-                String code = registerCode.getText().toString().trim();
+                String mobile = passwordMobile.getText().toString().trim();
+                String password = passwordPassword.getText().toString();
+                String code = passwordCode.getText().toString().trim();
 
                 verifyCode(mobile, code);
 
                 if (verifyStatus == 1) {
-                    register(mobile, password);
+                    resetPassword(mobile, password);
 
                     changeButtonStatus(0);
                 } else {
-                    Toast.makeText(RegisterActivity.this, R.string.code_verify_failed, Toast.LENGTH_LONG).show();
+                    Toast.makeText(ForgetPasswordActivity.this, R.string.code_verify_failed, Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -156,7 +148,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                         } else if (status == Config.EXEC_ERROR){
                             String info = jsonObject.getString("info");
-                            Toast.makeText(RegisterActivity.this, info, Toast.LENGTH_LONG).show();
+                            Toast.makeText(ForgetPasswordActivity.this, info, Toast.LENGTH_LONG).show();
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -164,7 +156,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                     changeButtonStatus(1);
                 } else if (message.what == Config.REQUEST_ERROR){
-                    Toast.makeText(RegisterActivity.this, R.string.query_error, Toast.LENGTH_LONG).show();
+                    Toast.makeText(ForgetPasswordActivity.this, R.string.query_error, Toast.LENGTH_LONG).show();
 
                     changeButtonStatus(1);
                 } else {
@@ -180,7 +172,7 @@ public class RegisterActivity extends AppCompatActivity {
                             //发送成功
                             countDownTimer.start();
 
-                            Toast.makeText(RegisterActivity.this, R.string.code_send_success, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ForgetPasswordActivity.this, R.string.code_send_success, Toast.LENGTH_SHORT).show();
                         } else if (event ==SMSSDK.EVENT_GET_SUPPORTED_COUNTRIES){
                             //返回支持发送验证码的国家列表
                         }
@@ -194,7 +186,7 @@ public class RegisterActivity extends AppCompatActivity {
                             String des = object.optString("detail");
                             status = object.optInt("status");
                             if (!TextUtils.isEmpty(des)) {
-                                Toast.makeText(RegisterActivity.this, des, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ForgetPasswordActivity.this, des, Toast.LENGTH_SHORT).show();
                             }
                         } catch (Exception e) {
                             SMSLog.getInstance().w(e);
@@ -214,11 +206,11 @@ public class RegisterActivity extends AppCompatActivity {
         SMSSDK.submitVerificationCode("86", mobile, code);
     }
 
-    private void register(final String mobile, final String password) {
+    private void resetPassword(final String mobile, final String password) {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                String requestUrl = Config.httpUrl + "/web/api/register";
+                String requestUrl = Config.httpUrl + "/web/api/resetpassword";
 
                 try {
                     String data = "mobile=" + URLEncoder.encode(mobile, "UTF-8")
@@ -276,11 +268,11 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void changeButtonStatus(int status) {
         if (status == 0) {
-            registerButton.setEnabled(false);
-            registerButton.setBackgroundResource(R.drawable.shape_button_disabled);
+            passwordButton.setEnabled(false);
+            passwordButton.setBackgroundResource(R.drawable.shape_button_disabled);
         } else {
-            registerButton.setEnabled(true);
-            registerButton.setBackgroundResource(R.drawable.selector_button);
+            passwordButton.setEnabled(true);
+            passwordButton.setBackgroundResource(R.drawable.selector_button);
         }
     }
 
@@ -290,4 +282,5 @@ public class RegisterActivity extends AppCompatActivity {
 
         countDownTimer.cancel();
     }
+
 }
