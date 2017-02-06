@@ -126,8 +126,6 @@ public class ForgetPasswordActivity extends AppCompatActivity {
                     resetPassword(mobile, password);
 
                     changeButtonStatus(0);
-                } else {
-                    Toast.makeText(ForgetPasswordActivity.this, R.string.code_verify_failed, Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -210,7 +208,7 @@ public class ForgetPasswordActivity extends AppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                String requestUrl = Config.httpUrl + "/web/api/resetpassword";
+                String requestUrl = Config.httpUrl + "/web/car/resetpassword";
 
                 try {
                     String data = "mobile=" + URLEncoder.encode(mobile, "UTF-8")
@@ -281,6 +279,8 @@ public class ForgetPasswordActivity extends AppCompatActivity {
         super.onDestroy();
 
         countDownTimer.cancel();
+
+        SMSSDK.unregisterAllEventHandler();
     }
 
 }

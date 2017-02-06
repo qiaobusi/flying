@@ -1,18 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/colorWindow">
-
-    <include
-        layout="@layout/toolbar"/>
-
-    <TextView
+    android:fitsSystemWindows="true">
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/life_express"
-        android:gravity="center"
-        android:textSize="@dimen/text_size"/>
+        android:orientation="vertical"
+        android:background="@color/colorWindow">
 
-</LinearLayout>
+        <include
+            layout="@layout/toolbar"/>
+
+        <EditText
+            android:id="@+id/express"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/input_height"
+            android:layout_marginTop="@dimen/edittext_margin_top"
+            android:paddingLeft="@dimen/padding_left"
+            android:paddingRight="@dimen/padding_right"
+            android:background="@color/colorWhite"
+            android:textSize="@dimen/text_size"
+            android:hint="@string/express"
+            android:inputType="phone"/>
+
+        <TextView
+            android:id="@+id/expressResult"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/input_height"
+            android:layout_marginTop="@dimen/line_height"
+            android:paddingLeft="@dimen/padding_left"
+            android:paddingRight="@dimen/padding_right"
+            android:gravity="center_vertical"
+            android:background="@color/colorWhite"
+            android:textSize="@dimen/text_size"
+            android:visibility="gone"/>
+        <ScrollView
+            android:id="@+id/traceScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_0"
+            android:layout_weight="1"
+            android:visibility="gone">
+            <TextView
+                android:id="@+id/trace"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size"
+                android:padding="@dimen/padding_left"/>
+        </ScrollView>
+
+    </LinearLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/expressSearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/icon_search"
+        android:layout_gravity="bottom|right"
+        android:layout_margin="@dimen/padding_right"
+        app:backgroundTint="@color/colorButton"
+        app:rippleColor="@color/colorButtonRipple"
+        app:borderWidth="@dimen/fab_border"
+        app:elevation="@dimen/fab_elevation"
+        app:pressedTranslationZ="@dimen/fab_pressed"
+        app:fabSize="normal" />
+</android.support.design.widget.CoordinatorLayout>
+
+
+

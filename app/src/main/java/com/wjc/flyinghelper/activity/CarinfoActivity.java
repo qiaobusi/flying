@@ -179,7 +179,7 @@ public class CarinfoActivity extends AppCompatActivity {
             @Override
             public void run() {
 
-                String requestUrl = Config.httpUrl + "/web/api/getcarinfo";
+                String requestUrl = Config.httpUrl + "/web/car/getcarinfo";
 
                 try {
                     String data = "plate_number=" + URLEncoder.encode(plateNumber, "UTF-8");

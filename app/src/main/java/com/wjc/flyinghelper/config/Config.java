@@ -16,7 +16,7 @@ public class Config {
     public static final String userinfo = "com.wjc.flyinghelper.userinfo";
     public static final String userinfoMobile = "userinfoMobile";
 
-    public static final String httpUrl = "http://www.helper.app:180";
+    public static final String httpUrl = "http://111.67.201.241";
 
 
     //mob.com key

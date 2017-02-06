@@ -64,7 +64,10 @@
     <string name="environment_updatetime">更新时间</string>
 
     <!-- activity_express -->
-    <string name="aa">aa</string>
+    <string name="express">快递单号</string>
+    <string name="express_state_2">在途中</string>
+    <string name="express_state_3">已签收</string>
+    <string name="express_state_4">问题件</string>
 
     <!-- activity_mobile -->
     <string name="mobile">手机号码</string>
@@ -94,7 +97,7 @@
     <string name="password_button">重置密码</string>
 
     <string name="code_send_success">验证码已发送</string>
-    <string name="code_verify_failed">验证码错误</string>
+    <string name="code_verify_failed">验证码错误</string> <!-- no use -->
 
 
 </resources>

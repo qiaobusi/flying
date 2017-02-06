@@ -134,8 +134,6 @@ public class RegisterActivity extends AppCompatActivity {
                     register(mobile, password);
 
                     changeButtonStatus(0);
-                } else {
-                    Toast.makeText(RegisterActivity.this, R.string.code_verify_failed, Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -218,7 +216,7 @@ public class RegisterActivity extends AppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                String requestUrl = Config.httpUrl + "/web/api/register";
+                String requestUrl = Config.httpUrl + "/web/car/register";
 
                 try {
                     String data = "mobile=" + URLEncoder.encode(mobile, "UTF-8")
@@ -289,5 +287,7 @@ public class RegisterActivity extends AppCompatActivity {
         super.onDestroy();
 
         countDownTimer.cancel();
+
+        SMSSDK.unregisterAllEventHandler();
     }
 }

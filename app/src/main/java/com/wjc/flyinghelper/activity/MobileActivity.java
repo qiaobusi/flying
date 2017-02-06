@@ -45,7 +45,6 @@ public class MobileActivity extends AppCompatActivity {
     private void initViewComponent() {
         mobile = (EditText) findViewById(R.id.mobile);
         mobileResult = (TextView) findViewById(R.id.mobileResult);
-
         mobileSearch = (FloatingActionButton) findViewById(R.id.mobileSearch);
 
         mobileSearch.setOnClickListener(new View.OnClickListener() {

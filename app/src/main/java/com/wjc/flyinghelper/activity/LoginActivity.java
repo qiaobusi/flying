@@ -137,7 +137,7 @@ public class LoginActivity extends AppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                String requestUrl = Config.httpUrl + "/web/api/login";
+                String requestUrl = Config.httpUrl + "/web/car/login";
 
                 try {
                     String data = "mobile=" + URLEncoder.encode(mobile, "UTF-8")
