@@ -119,6 +119,10 @@ public class ForgetPasswordActivity extends AppCompatActivity {
                 String password = passwordPassword.getText().toString();
                 String code = passwordCode.getText().toString().trim();
 
+                if (mobile.length() == 0 || password.length() == 0 || code.length() == 0) {
+                    return;
+                }
+
                 resetPassword(mobile, password, code);
 
                 changeButtonStatus(0);

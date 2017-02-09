@@ -65,6 +65,14 @@ public class PasswordActivity extends AppCompatActivity {
                 String password = passwordNew.getText().toString();
                 String repeatPassword = passwordRepeat.getText().toString();
 
+                if (oldPassword.length() == 0 || password.length() == 0 || repeatPassword.length() == 0) {
+                    return;
+                }
+                if (!password.equals(repeatPassword)) {
+                    Toast.makeText(PasswordActivity.this, R.string.toast_repeat_error, Toast.LENGTH_LONG).show();
+                    return;
+                }
+
                 savePassword(oldPassword, password);
 
                 changeButtonStatus(0);

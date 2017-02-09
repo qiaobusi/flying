@@ -22,7 +22,7 @@ import java.util.Map;
 
 public class MobileActivity extends AppCompatActivity {
 
-    private EditText mobile;
+    private EditText mobileNumber;
     private TextView mobileResult;
     private FloatingActionButton mobileSearch;
 
@@ -43,22 +43,23 @@ public class MobileActivity extends AppCompatActivity {
     }
 
     private void initViewComponent() {
-        mobile = (EditText) findViewById(R.id.mobile);
+        mobileNumber = (EditText) findViewById(R.id.mobileNumber);
         mobileResult = (TextView) findViewById(R.id.mobileResult);
         mobileSearch = (FloatingActionButton) findViewById(R.id.mobileSearch);
 
         mobileSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String mobileText = mobile.getText().toString().trim();
-                if (mobileText.length() == 0) {
+                String mobile = mobileNumber.getText().toString().trim();
+
+                if (mobile.length() == 0) {
                     return;
                 }
 
                 changeFabStatus(0);
 
                 Mobile api = (Mobile) MobAPI.getAPI(Mobile.NAME);
-                api.phoneNumberToAddress(mobileText, new APICallback() {
+                api.phoneNumberToAddress(mobile, new APICallback() {
                     @Override
                     public void onSuccess(API api, int i, Map<String, Object> map) {
                         HashMap<String, Object> address = (HashMap<String, Object>) map.get("result");

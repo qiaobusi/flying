@@ -9,7 +9,6 @@ import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -72,6 +71,10 @@ public class LoginActivity extends AppCompatActivity {
                 String mobile = loginMobile.getText().toString().trim();
                 String password = loginPassword.getText().toString();
 
+                if (mobile.length() == 0 || password.length() == 0) {
+                    return;
+                }
+
                 login(mobile, password);
 
                 changeButtonStatus(0);
@@ -121,7 +124,7 @@ public class LoginActivity extends AppCompatActivity {
                             Intent intent = new Intent(LoginActivity.this, UcenterActivity.class);
                             startActivity(intent);
 
-                            LoginActivity.this.finish();
+                            finish();
                         } else if (status == Config.EXEC_ERROR){
                             String info = jsonObject.getString("info");
                             Toast.makeText(LoginActivity.this, info, Toast.LENGTH_LONG).show();
@@ -212,8 +215,8 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 999 && requestCode == 999) {
-            LoginActivity.this.finish();
+        if (requestCode == 999 && resultCode == 999) {
+            finish();
         }
     }
 }

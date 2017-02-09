@@ -118,6 +118,9 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String mobile = registerMobile.getText().toString().trim();
+                if (mobile.length() == 0) {
+                    return;
+                }
 
                 sendCode(mobile);
             }
@@ -129,6 +132,10 @@ public class RegisterActivity extends AppCompatActivity {
                 String mobile = registerMobile.getText().toString().trim();
                 String password = registerPassword.getText().toString();
                 String code = registerCode.getText().toString().trim();
+
+                if (mobile.length() == 0 || password.length() == 0 || code.length() == 0) {
+                    return;
+                }
 
                 register(mobile, password, code);
 
@@ -167,7 +174,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                             setResult(999);
 
-                            RegisterActivity.this.finish();
+                            finish();
                         } else if (status == Config.EXEC_ERROR){
                             String info = jsonObject.getString("info");
                             Toast.makeText(RegisterActivity.this, info, Toast.LENGTH_LONG).show();

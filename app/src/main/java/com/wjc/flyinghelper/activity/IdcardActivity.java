@@ -23,7 +23,7 @@ import static com.mob.tools.utils.R.forceCast;
 
 public class IdcardActivity extends AppCompatActivity {
 
-    private EditText idcard;
+    private EditText idcardNumber;
     private TextView idcardArea, idcardBirth, idcardSex;
     private FloatingActionButton idcardSearch;
 
@@ -44,7 +44,7 @@ public class IdcardActivity extends AppCompatActivity {
     }
 
     private void initViewComponent() {
-        idcard = (EditText) findViewById(R.id.idcard);
+        idcardNumber = (EditText) findViewById(R.id.idcardNumber);
         idcardArea = (TextView) findViewById(R.id.idcardArea);
         idcardBirth = (TextView) findViewById(R.id.idcardBirth);
         idcardSex = (TextView) findViewById(R.id.idcardSex);
@@ -54,15 +54,16 @@ public class IdcardActivity extends AppCompatActivity {
         idcardSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String idcardText = idcard.getText().toString().trim();
-                if (idcardText.length() == 0) {
+                String idcard = idcardNumber.getText().toString().trim();
+
+                if (idcard.length() == 0) {
                     return;
                 }
 
                 changeFabStatus(0);
 
                 IDCard api = forceCast(MobAPI.getAPI(IDCard.NAME));
-                api.queryIDCard(idcardText, new APICallback() {
+                api.queryIDCard(idcard, new APICallback() {
                     @Override
                     public void onSuccess(API api, int i, Map<String, Object> result) {
                         HashMap<String, Object> address = forceCast(result.get("result"));

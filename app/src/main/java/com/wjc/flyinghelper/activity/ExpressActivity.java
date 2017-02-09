@@ -30,9 +30,9 @@ import java.net.URLEncoder;
 
 public class ExpressActivity extends AppCompatActivity {
 
-    private EditText express;
+    private EditText expressNumber;
     private TextView expressResult;
-    private ScrollView traceScrollView;
+    private ScrollView expressScrollView;
     private TextView trace;
     private FloatingActionButton expressSearch;
 
@@ -55,18 +55,22 @@ public class ExpressActivity extends AppCompatActivity {
     }
 
     private void initViewComponent() {
-        express = (EditText) findViewById(R.id.express);
+        expressNumber = (EditText) findViewById(R.id.expressNumber);
         expressResult = (TextView) findViewById(R.id.expressResult);
-        traceScrollView = (ScrollView) findViewById(R.id.traceScrollView);
+        expressScrollView = (ScrollView) findViewById(R.id.expressScrollView);
         trace = (TextView) findViewById(R.id.trace);
         expressSearch = (FloatingActionButton) findViewById(R.id.expressSearch);
 
         expressSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String logisticCode = express.getText().toString().trim();
+                String express = expressNumber.getText().toString().trim();
 
-                expressQuery(logisticCode);
+                if (express.length() == 0) {
+                    return;
+                }
+
+                expressQuery(express);
 
                 changeFabStatus(0);
             }
@@ -112,7 +116,7 @@ public class ExpressActivity extends AppCompatActivity {
 
                             if (expressResult.getVisibility() == View.GONE) {
                                 expressResult.setVisibility(View.VISIBLE);
-                                traceScrollView.setVisibility(View.VISIBLE);
+                                expressScrollView.setVisibility(View.VISIBLE);
                             }
                         } else if (status == Config.EXEC_ERROR){
                             String info = jsonObject.getString("info");

@@ -137,6 +137,10 @@ public class CarinfoActivity extends AppCompatActivity {
                 String platenumber = carinfoPlatenumber.getText().toString().trim();
                 platenumber = provinceAz + Config.platenumberSeparate + platenumber;
 
+                if (platenumber.length() == 0) {
+                    return;
+                }
+
                 getUserinfo(platenumber);
 
                 changeButtonStatus(0);
