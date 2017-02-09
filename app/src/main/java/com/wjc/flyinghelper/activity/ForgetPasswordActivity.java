@@ -38,7 +38,6 @@ public class ForgetPasswordActivity extends AppCompatActivity {
     private CountDownTimer countDownTimer;
 
     private int second = 120;
-    private int verifyStatus = 0;
 
     private Handler handler;
 
@@ -120,13 +119,9 @@ public class ForgetPasswordActivity extends AppCompatActivity {
                 String password = passwordPassword.getText().toString();
                 String code = passwordCode.getText().toString().trim();
 
-                verifyCode(mobile, code);
+                resetPassword(mobile, password, code);
 
-                if (verifyStatus == 1) {
-                    resetPassword(mobile, password);
-
-                    changeButtonStatus(0);
-                }
+                changeButtonStatus(0);
             }
         });
 
@@ -142,8 +137,8 @@ public class ForgetPasswordActivity extends AppCompatActivity {
 
                         int status = jsonObject.getInt("status");
                         if (status == Config.EXEC_SUCCESS) {
-                            JSONObject dataObject = jsonObject.getJSONObject("data");
-
+                            String info = jsonObject.getString("info");
+                            Toast.makeText(ForgetPasswordActivity.this, info, Toast.LENGTH_LONG).show();
                         } else if (status == Config.EXEC_ERROR){
                             String info = jsonObject.getString("info");
                             Toast.makeText(ForgetPasswordActivity.this, info, Toast.LENGTH_LONG).show();
@@ -154,7 +149,7 @@ public class ForgetPasswordActivity extends AppCompatActivity {
 
                     changeButtonStatus(1);
                 } else if (message.what == Config.REQUEST_ERROR){
-                    Toast.makeText(ForgetPasswordActivity.this, R.string.query_error, Toast.LENGTH_LONG).show();
+                    Toast.makeText(ForgetPasswordActivity.this, R.string.request_error, Toast.LENGTH_LONG).show();
 
                     changeButtonStatus(1);
                 } else {
@@ -164,8 +159,6 @@ public class ForgetPasswordActivity extends AppCompatActivity {
                     if (result == SMSSDK.RESULT_COMPLETE) {
                         if (event == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE) {
                             //验证成功
-
-                            verifyStatus = 1;
                         } else if (event == SMSSDK.EVENT_GET_VERIFICATION_CODE){
                             //发送成功
                             countDownTimer.start();
@@ -200,11 +193,7 @@ public class ForgetPasswordActivity extends AppCompatActivity {
         SMSSDK.getVerificationCode("86", mobile);
     }
 
-    private void verifyCode(String mobile, String code) {
-        SMSSDK.submitVerificationCode("86", mobile, code);
-    }
-
-    private void resetPassword(final String mobile, final String password) {
+    private void resetPassword(final String mobile, final String password, final String code) {
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -212,7 +201,8 @@ public class ForgetPasswordActivity extends AppCompatActivity {
 
                 try {
                     String data = "mobile=" + URLEncoder.encode(mobile, "UTF-8")
-                            + "&password=" + URLEncoder.encode(password, "UTF-8");
+                            + "&password=" + URLEncoder.encode(password, "UTF-8")
+                            + "&code=" + URLEncoder.encode(code, "UTF-8");
 
                     URL url = new URL(requestUrl);
                     HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();

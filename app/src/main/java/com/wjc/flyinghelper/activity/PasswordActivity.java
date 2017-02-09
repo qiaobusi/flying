@@ -3,13 +3,11 @@ package com.wjc.flyinghelper.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Typeface;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -29,19 +27,19 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 
-public class LoginActivity extends AppCompatActivity {
+public class PasswordActivity extends AppCompatActivity {
 
-    private TextView loginLogo;
-    private EditText loginMobile, loginPassword;
-    private Button loginButton;
-    private TextView loginForgetPassword, loginRegister;
+    private EditText passwordOld, passwordNew, passwordRepeat;
+    private Button passwordSave;
+
+    private SharedPreferences sharedPreferences;
 
     private Handler handler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_password);
 
         initToolbar();
         initViewComponent();
@@ -51,44 +49,25 @@ public class LoginActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         TextView toolbarText = (TextView) toolbar.findViewById(R.id.toolbarText);
-        toolbarText.setText(R.string.toolbar_login);
+        toolbarText.setText(R.string.toolbar_password);
     }
 
     private void initViewComponent() {
-        loginLogo = (TextView) findViewById(R.id.loginLogo);
-        loginMobile = (EditText) findViewById(R.id.loginMobile);
-        loginPassword = (EditText) findViewById(R.id.loginPassword);
-        loginButton = (Button) findViewById(R.id.loginButton);
-        loginForgetPassword = (TextView) findViewById(R.id.loginForgetPassword);
-        loginRegister = (TextView) findViewById(R.id.loginRegister);
+        passwordOld = (EditText) findViewById(R.id.passwordOld);
+        passwordNew = (EditText) findViewById(R.id.passwordNew);
+        passwordRepeat = (EditText) findViewById(R.id.passwordRepeat);
+        passwordSave = (Button) findViewById(R.id.passwordSave);
 
-        Typeface typeface = Typeface.createFromAsset(getAssets(), "iconfont.ttf");
-        loginLogo.setTypeface(typeface);
-        loginLogo.setText(getString(R.string.icon_account));
-
-        loginButton.setOnClickListener(new View.OnClickListener() {
+        passwordSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String mobile = loginMobile.getText().toString().trim();
-                String password = loginPassword.getText().toString();
+                String oldPassword = passwordOld.getText().toString();
+                String password = passwordNew.getText().toString();
+                String repeatPassword = passwordRepeat.getText().toString();
 
-                login(mobile, password);
+                savePassword(oldPassword, password);
 
                 changeButtonStatus(0);
-            }
-        });
-        loginForgetPassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this, ForgetPasswordActivity.class);
-                startActivity(intent);
-            }
-        });
-        loginRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
-                startActivityForResult(intent, 999);
             }
         });
 
@@ -104,34 +83,18 @@ public class LoginActivity extends AppCompatActivity {
 
                         int status = jsonObject.getInt("status");
                         if (status == Config.EXEC_SUCCESS) {
-                            JSONObject dataObject = jsonObject.getJSONObject("data");
-                            String id = dataObject.getString("id");
-                            String mobile = dataObject.getString("mobile");
-                            String name = dataObject.getString("name");
-                            String platenumber = dataObject.getString("platenumber");
-
-                            SharedPreferences sharedPreferences = getSharedPreferences(Config.userinfo, Context.MODE_PRIVATE);
-                            SharedPreferences.Editor editor = sharedPreferences.edit();
-                            editor.putString(Config.userinfoId, id);
-                            editor.putString(Config.userinfoMobile, mobile);
-                            editor.putString(Config.userinfoName, name);
-                            editor.putString(Config.userinfoPlatenumber, platenumber);
-                            editor.commit();
-
-                            Intent intent = new Intent(LoginActivity.this, UcenterActivity.class);
-                            startActivity(intent);
-
-                            LoginActivity.this.finish();
+                            String info = jsonObject.getString("info");
+                            Toast.makeText(PasswordActivity.this, info, Toast.LENGTH_LONG).show();
                         } else if (status == Config.EXEC_ERROR){
                             String info = jsonObject.getString("info");
-                            Toast.makeText(LoginActivity.this, info, Toast.LENGTH_LONG).show();
+                            Toast.makeText(PasswordActivity.this, info, Toast.LENGTH_LONG).show();
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
 
                 } else if (message.what == Config.REQUEST_ERROR){
-                    Toast.makeText(LoginActivity.this, R.string.request_error, Toast.LENGTH_LONG).show();
+                    Toast.makeText(PasswordActivity.this, R.string.request_error, Toast.LENGTH_LONG).show();
                 }
 
                 changeButtonStatus(1);
@@ -140,14 +103,19 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    private void login(final String mobile, final String password) {
+
+    private void savePassword(final String oldPassword, final String password) {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                String requestUrl = Config.httpUrl + "/web/car/login";
+                String requestUrl = Config.httpUrl + "/web/car/savepassword";
+
+                sharedPreferences = getSharedPreferences(Config.userinfo, Context.MODE_PRIVATE);
+                String id = sharedPreferences.getString(Config.userinfoId, "");
 
                 try {
-                    String data = "mobile=" + URLEncoder.encode(mobile, "UTF-8")
+                    String data = "id=" + URLEncoder.encode(id, "UTF-8")
+                            + "&oldPassword=" + URLEncoder.encode(oldPassword, "UTF-8")
                             + "&password=" + URLEncoder.encode(password, "UTF-8");
 
                     URL url = new URL(requestUrl);
@@ -201,19 +169,12 @@ public class LoginActivity extends AppCompatActivity {
 
     private void changeButtonStatus(int status) {
         if (status == 0) {
-            loginButton.setEnabled(false);
-            loginButton.setBackgroundResource(R.drawable.shape_button_disabled);
+            passwordSave.setEnabled(false);
+            passwordSave.setBackgroundResource(R.drawable.shape_button_disabled);
         } else {
-            loginButton.setEnabled(true);
-            loginButton.setBackgroundResource(R.drawable.selector_button);
+            passwordSave.setEnabled(true);
+            passwordSave.setBackgroundResource(R.drawable.selector_button);
         }
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 999 && requestCode == 999) {
-            LoginActivity.this.finish();
-        }
-    }
 }

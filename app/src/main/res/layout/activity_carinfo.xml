@@ -1,79 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true">
+    android:orientation="vertical"
+    android:background="@color/colorWindow">
+
+    <include
+        layout="@layout/toolbar"/>
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="@color/colorWindow">
-
-        <include
-            layout="@layout/toolbar"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/input_height"
-            android:orientation="horizontal"
-            android:layout_marginTop="@dimen/edittext_margin_top"
-            android:background="@color/colorWhite">
-            <Spinner
-                android:id="@+id/provinceShort"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent"
-                android:spinnerMode="dialog"/>
-            <Spinner
-                android:id="@+id/a2z"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent"
-                android:spinnerMode="dialog"/>
-            <EditText
-                android:id="@+id/plateNumber"
-                android:layout_width="0dp"
-                android:layout_weight="3"
-                android:layout_height="match_parent" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/input_height"
-            android:orientation="horizontal"
-            android:layout_marginTop="@dimen/edittext_margin_top">
-            <TextView
-                android:id="@+id/carInfoName"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent"
-                android:background="@color/colorWhite"/>
-            <Space
-                android:layout_width="@dimen/line_height"
-                android:layout_height="match_parent"/>
-            <Button
-                android:id="@+id/dial"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent"
-                android:background="@color/colorIconBg"
-                android:gravity="center"
-                android:textSize="@dimen/text_size"
-                android:textColor="@color/colorWhite"/>
-        </LinearLayout>
+        android:layout_height="@dimen/input_height"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/edittext_margin_top"
+        android:background="@color/colorWhite">
+        <TextView
+            android:id="@+id/carinfoProvinceAz"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/padding_left"
+            android:paddingRight="@dimen/padding_right"
+            android:textSize="@dimen/text_size"
+            android:gravity="center_vertical"
+            android:background="@drawable/selector_linearlayout"
+            android:text="@string/ucenter_province_az" />
+        <View
+            android:layout_width="@dimen/line_height"
+            android:layout_height="match_parent"
+            android:background="@color/colorWindow"/>
+        <EditText
+            android:id="@+id/carinfoPlatenumber"
+            android:layout_width="@dimen/dp_0"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/padding_left"
+            android:paddingRight="@dimen/padding_right"
+            android:textSize="@dimen/text_size"
+            android:background="@color/colorWhite"
+            android:hint="@string/ucenter_platenumber"
+            android:inputType="text"/>
+        <Button
+            android:id="@+id/carinfoSearch"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/padding_left"
+            android:paddingRight="@dimen/padding_right"
+            android:gravity="center"
+            android:background="@drawable/selector_button_search"
+            android:textSize="@dimen/text_size"
+            android:text="@string/carinfo_search"
+            android:textColor="@color/colorWhite"/>
     </LinearLayout>
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/carSearch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/icon_search"
-        android:layout_gravity="bottom|right"
-        android:layout_margin="@dimen/padding_right"
-        app:backgroundTint="@color/colorButton"
-        app:rippleColor="@color/colorButtonRipple"
-        app:borderWidth="@dimen/fab_border"
-        app:elevation="@dimen/fab_elevation"
-        app:pressedTranslationZ="@dimen/fab_pressed"
-        app:fabSize="normal" />
-</android.support.design.widget.CoordinatorLayout>
+    <LinearLayout
+        android:id="@+id/carinfoLinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/input_height"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/edittext_margin_top"
+        android:visibility="gone">
+        <TextView
+            android:id="@+id/carinfoName"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/padding_left"
+            android:paddingRight="@dimen/padding_right"
+            android:gravity="center_vertical"
+            android:background="@color/colorWhite"
+            android:textSize="@dimen/text_size" />
+        <View
+            android:layout_width="@dimen/line_height"
+            android:layout_height="match_parent"
+            android:background="@color/colorWindow"/>
+        <Button
+            android:id="@+id/carinfoDial"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/padding_left"
+            android:paddingRight="@dimen/padding_right"
+            android:gravity="center"
+            android:background="@drawable/selector_button_dial"
+            android:textSize="@dimen/text_size"
+            android:text="@string/carinfo_dial"
+            android:textColor="@color/colorWhite"/>
+    </LinearLayout>
+</LinearLayout>

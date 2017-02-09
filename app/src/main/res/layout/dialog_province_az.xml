@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingLeft="@dimen/wheel_margin"
+    android:paddingRight="@dimen/wheel_margin">
+    <com.jp.wheelview.WheelView
+        android:id="@+id/dialogProvince"
+        android:layout_width="@dimen/dp_0"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        app:itemNumber="3"
+        app:lineColor="@color/colorWheelLine"
+        app:maskHeight="@dimen/wheel_mask_height"
+        app:noEmpty="true"
+        app:normalTextColor="@color/colorWheelNormal"
+        app:normalTextSize="@dimen/wheel_normal_size"
+        app:selectedTextColor="@color/colorWheelSelected"
+        app:selectedTextSize="@dimen/wheel_selected_size"
+        app:unitHeight="@dimen/wheel_unit_height" />
+
+    <Space
+        android:layout_width="@dimen/wheel_margin"
+        android:layout_height="match_parent" />
+
+    <com.jp.wheelview.WheelView
+        android:id="@+id/dialogAz"
+        android:layout_width="@dimen/dp_0"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        app:itemNumber="3"
+        app:lineColor="@color/colorWheelLine"
+        app:maskHeight="@dimen/wheel_mask_height"
+        app:noEmpty="true"
+        app:normalTextColor="@color/colorWheelNormal"
+        app:normalTextSize="@dimen/wheel_normal_size"
+        app:selectedTextColor="@color/colorWheelSelected"
+        app:selectedTextSize="@dimen/wheel_selected_size"
+        app:unitHeight="@dimen/wheel_unit_height" />
+</LinearLayout>

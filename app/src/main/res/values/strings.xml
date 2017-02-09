@@ -5,6 +5,8 @@
     <string name="request_error">请求错误</string>
     <string name="query_error">查询错误</string>
 
+    <string name="province_az_title">选择省份</string>
+
     <!-- icon_font -->
     <string name="icon_back">&#xe609;</string>
     <string name="icon_forward">&#xe602;</string>
@@ -26,6 +28,7 @@
     <string name="toolbar_forget_password">重置密码</string>
     <string name="toolbar_car_info">车辆信息查询</string>
     <string name="toolbar_ucenter">用户中心</string>
+    <string name="toolbar_password">修改密码</string>
 
     <!-- activity_main -->
     <string name="tab_life">生活</string>
@@ -95,6 +98,25 @@
     <string name="password_code">手机验证码</string>
     <string name="password_code_button">发送验证码</string>
     <string name="password_button">重置密码</string>
+
+    <!-- activity_carinfo -->
+    <string name="carinfo_search">查询</string>
+    <string name="carinfo_dial">呼叫</string>
+
+    <!-- activity_ucenter -->
+    <string name="ucenter_name">姓名</string>
+    <string name="ucenter_province_az">京A</string>
+    <string name="ucenter_platenumber">车牌号码</string>
+    <string name="ucenter_password">修改密码</string>
+    <string name="ucenter_save">保存</string>
+    <string name="ucenter_quit">退出</string>
+
+    <!-- activity_password -->
+    <string name="password_old">旧密码</string>
+    <string name="password_new">新密码</string>
+    <string name="password_repeat">确认新密码</string>
+    <string name="password_save">保存</string>
+
 
     <string name="code_send_success">验证码已发送</string>
     <string name="code_verify_failed">验证码错误</string> <!-- no use -->

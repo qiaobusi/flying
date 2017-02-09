@@ -40,7 +40,7 @@
             android:paddingRight="@dimen/padding_right"
             android:background="@drawable/selector_linearlayout">
             <TextView
-                android:layout_width="0dp"
+                android:layout_width="@dimen/dp_0"
                 android:layout_weight="1"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"

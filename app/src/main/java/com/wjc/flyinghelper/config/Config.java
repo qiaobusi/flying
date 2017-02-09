@@ -14,9 +14,14 @@ public class Config {
     public static final String pmMinute = "pmMinute";
 
     public static final String userinfo = "com.wjc.flyinghelper.userinfo";
+    public static final String userinfoId = "userinfoId";
     public static final String userinfoMobile = "userinfoMobile";
+    public static final String userinfoName = "userinfoName";
+    public static final String userinfoPlatenumber = "userinfoPlatenumber";
 
     public static final String httpUrl = "http://111.67.201.241";
+
+    public static final String platenumberSeparate = "=";
 
 
     //mob.com key

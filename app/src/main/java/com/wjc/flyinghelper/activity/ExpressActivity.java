@@ -123,7 +123,7 @@ public class ExpressActivity extends AppCompatActivity {
                     }
 
                 } else if (message.what == Config.REQUEST_ERROR){
-                    Toast.makeText(ExpressActivity.this, R.string.query_error, Toast.LENGTH_LONG).show();
+                    Toast.makeText(ExpressActivity.this, R.string.request_error, Toast.LENGTH_LONG).show();
                 }
 
                 changeFabStatus(1);
@@ -156,7 +156,7 @@ public class ExpressActivity extends AppCompatActivity {
                     outputStream.close();
 
                     Message message = new Message();
-                    int aaa = urlConnection.getResponseCode();
+
                     if (urlConnection.getResponseCode() == HttpURLConnection.HTTP_OK) {
                         InputStream inputStream = urlConnection.getInputStream();
                         byte[] bytes = new byte[1024];

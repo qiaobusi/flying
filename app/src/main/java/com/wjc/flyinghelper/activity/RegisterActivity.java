@@ -1,5 +1,8 @@
 package com.wjc.flyinghelper.activity;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.CountDownTimer;
 import android.os.Handler;
@@ -41,7 +44,6 @@ public class RegisterActivity extends AppCompatActivity {
     private CountDownTimer countDownTimer;
 
     private int second = 120;
-    private int verifyStatus = 0;
 
     private Handler handler;
 
@@ -128,13 +130,9 @@ public class RegisterActivity extends AppCompatActivity {
                 String password = registerPassword.getText().toString();
                 String code = registerCode.getText().toString().trim();
 
-                verifyCode(mobile, code);
+                register(mobile, password, code);
 
-                if (verifyStatus == 1) {
-                    register(mobile, password);
-
-                    changeButtonStatus(0);
-                }
+                changeButtonStatus(0);
             }
         });
 
@@ -151,7 +149,25 @@ public class RegisterActivity extends AppCompatActivity {
                         int status = jsonObject.getInt("status");
                         if (status == Config.EXEC_SUCCESS) {
                             JSONObject dataObject = jsonObject.getJSONObject("data");
+                            String id = dataObject.getString("id");
+                            String mobile = dataObject.getString("mobile");
+                            String name = dataObject.getString("name");
+                            String platenumber = dataObject.getString("platenumber");
 
+                            SharedPreferences sharedPreferences = getSharedPreferences(Config.userinfo, Context.MODE_PRIVATE);
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            editor.putString(Config.userinfoId, id);
+                            editor.putString(Config.userinfoMobile, mobile);
+                            editor.putString(Config.userinfoName, name);
+                            editor.putString(Config.userinfoPlatenumber, platenumber);
+                            editor.commit();
+
+                            Intent intent = new Intent(RegisterActivity.this, UcenterActivity.class);
+                            startActivity(intent);
+
+                            setResult(999);
+
+                            RegisterActivity.this.finish();
                         } else if (status == Config.EXEC_ERROR){
                             String info = jsonObject.getString("info");
                             Toast.makeText(RegisterActivity.this, info, Toast.LENGTH_LONG).show();
@@ -162,7 +178,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                     changeButtonStatus(1);
                 } else if (message.what == Config.REQUEST_ERROR){
-                    Toast.makeText(RegisterActivity.this, R.string.query_error, Toast.LENGTH_LONG).show();
+                    Toast.makeText(RegisterActivity.this, R.string.request_error, Toast.LENGTH_LONG).show();
 
                     changeButtonStatus(1);
                 } else {
@@ -172,8 +188,6 @@ public class RegisterActivity extends AppCompatActivity {
                     if (result == SMSSDK.RESULT_COMPLETE) {
                         if (event == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE) {
                             //验证成功
-
-                            verifyStatus = 1;
                         } else if (event == SMSSDK.EVENT_GET_VERIFICATION_CODE){
                             //发送成功
                             countDownTimer.start();
@@ -208,11 +222,7 @@ public class RegisterActivity extends AppCompatActivity {
         SMSSDK.getVerificationCode("86", mobile);
     }
 
-    private void verifyCode(String mobile, String code) {
-        SMSSDK.submitVerificationCode("86", mobile, code);
-    }
-
-    private void register(final String mobile, final String password) {
+    private void register(final String mobile, final String password, final String code) {
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -220,7 +230,8 @@ public class RegisterActivity extends AppCompatActivity {
 
                 try {
                     String data = "mobile=" + URLEncoder.encode(mobile, "UTF-8")
-                            + "&password=" + URLEncoder.encode(password, "UTF-8");
+                            + "&password=" + URLEncoder.encode(password, "UTF-8")
+                            + "&code=" + URLEncoder.encode(code, "UTF-8");
 
                     URL url = new URL(requestUrl);
                     HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();

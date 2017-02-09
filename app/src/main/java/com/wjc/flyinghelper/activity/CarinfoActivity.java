@@ -1,21 +1,21 @@
 package com.wjc.flyinghelper.activity;
 
-import android.content.res.ColorStateList;
+import android.content.DialogInterface;
 import android.os.Handler;
 import android.os.Message;
-import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.jp.wheelview.WheelView;
 import com.wjc.flyinghelper.R;
 import com.wjc.flyinghelper.config.Config;
 
@@ -31,27 +31,27 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 
 public class CarinfoActivity extends AppCompatActivity {
-    private Spinner provinceShort, a2z;
-    private EditText plateNumber;
-    private TextView carInfoName;
-    private Button dial;
-    private FloatingActionButton carSearch;
+    private TextView carinfoProvinceAz;
+    private EditText carinfoPlatenumber;
+    private TextView carinfoName;
+    private Button carinfoSearch, carinfoDial;
+    private LinearLayout carinfoLinearLayout;
 
-    private String[] provinceShorts = {
+    private WheelView dialogProvince, dialogAz;
+    private View dialogView;
+    private String[] provinceArray = {
             "京", "津", "冀", "晋", "蒙", "辽", "吉", "黑", "沪", "苏",
             "浙", "皖", "闽", "赣", "鲁", "豫", "鄂", "湘", "粤", "桂",
             "琼", "川", "贵", "云", "渝", "藏", "陕", "甘", "青", "宁",
             "新"
     };
-    private String[] a2zs = {
+    private String[] azArray = {
             "A", "B", "C", "D", "E", "F", "G", "H", "I", "G",
             "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T",
             "U", "V", "W", "X", "Y", "Z"
     };
-    private ArrayList<String> provinceShortList, a2zList;
-    private ArrayAdapter provinceShortAdapter, a2zAdapter;
+    private ArrayList<String> provinceList, azList;
 
-    private String provinceShortVal, a2zVal;
     private String name, mobile;
 
     private Handler handler;
@@ -73,69 +73,73 @@ public class CarinfoActivity extends AppCompatActivity {
     }
 
     private void initViewComponent() {
-        provinceShortList = new ArrayList<String>();
-        a2zList = new ArrayList<String>();
-        for (int i = 0; i < provinceShorts.length; i++) {
-            provinceShortList.add(provinceShorts[i]);
+        carinfoProvinceAz = (TextView) findViewById(R.id.carinfoProvinceAz);
+        carinfoPlatenumber = (EditText) findViewById(R.id.carinfoPlatenumber);
+        carinfoName = (TextView) findViewById(R.id.carinfoName);
+        carinfoSearch = (Button) findViewById(R.id.carinfoSearch);
+        carinfoDial = (Button) findViewById(R.id.carinfoDial);
+        carinfoLinearLayout = (LinearLayout) findViewById(R.id.carinfoLinearLayout);
+
+        provinceList = new ArrayList<String>();
+        for (int i = 0; i < provinceArray.length; i++) {
+            provinceList.add(provinceArray[i]);
         }
-        for (int i = 0; i < a2zs.length; i++) {
-            a2zList.add(a2zs[i]);
+        azList = new ArrayList<String>();
+        for (int i = 0; i < azArray.length; i++) {
+            azList.add(azArray[i]);
         }
 
-        provinceShort = (Spinner) findViewById(R.id.provinceShort);
-        a2z = (Spinner) findViewById(R.id.a2z);
-        plateNumber = (EditText) findViewById(R.id.plateNumber);
-        carInfoName = (TextView) findViewById(R.id.carInfoName);
-        dial = (Button) findViewById(R.id.dial);
-        carSearch = (FloatingActionButton) findViewById(R.id.carSearch);
-
-        provinceShortAdapter = new ArrayAdapter<String>(CarinfoActivity.this, android.R.layout.simple_spinner_item, provinceShortList);
-        provinceShortAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        a2zAdapter = new ArrayAdapter<String>(CarinfoActivity.this, android.R.layout.simple_spinner_item, a2zList);
-        a2zAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        provinceShort.setAdapter(provinceShortAdapter);
-        a2z.setAdapter(a2zAdapter);
-
-        provinceShort.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        carinfoProvinceAz.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                provinceShortVal = (String) provinceShort.getSelectedItem();
-            }
+            public void onClick(View view) {
+                dialogView = LayoutInflater.from(CarinfoActivity.this).inflate(R.layout.dialog_province_az, null);
+                dialogProvince = (WheelView) dialogView.findViewById(R.id.dialogProvince);
+                dialogAz = (WheelView) dialogView.findViewById(R.id.dialogAz);
+                dialogProvince.setData(provinceList);
+                dialogAz.setData(azList);
 
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
+                dialogProvince.setDefault(0);
+                dialogAz.setDefault(0);
 
+                AlertDialog.Builder builder = new AlertDialog.Builder(CarinfoActivity.this);
+                builder.setTitle(R.string.province_az_title);
+                builder.setView(dialogView);
+                builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                    }
+                });
+                builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        String provinceText = dialogProvince.getSelectedText();
+                        String azText = dialogAz.getSelectedText();
+
+                        String text = provinceText + azText;
+                        carinfoProvinceAz.setText(text);
+                    }
+                });
+                builder.show();
             }
         });
-        a2z.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                a2zVal = (String) a2z.getSelectedItem();
-            }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-
-        dial.setOnClickListener(new View.OnClickListener() {
+        carinfoDial.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dialMobile(mobile);
             }
         });
 
-        carSearch.setOnClickListener(new View.OnClickListener() {
+        carinfoSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String plate = plateNumber.getText().toString().trim();
-                plate = provinceShortVal + a2zVal + plate;
+                String provinceAz = carinfoProvinceAz.getText().toString();
+                String platenumber = carinfoPlatenumber.getText().toString().trim();
+                platenumber = provinceAz + Config.platenumberSeparate + platenumber;
 
-                getCarInfo(plate);
+                getUserinfo(platenumber);
 
-                changeFabStatus(0);
+                changeButtonStatus(0);
             }
         });
 
@@ -155,7 +159,10 @@ public class CarinfoActivity extends AppCompatActivity {
                             name = dataObject.getString("name");
                             mobile = dataObject.getString("mobile");
 
-                            carInfoName.setText(name);
+                            carinfoName.setText(name);
+                            if (carinfoLinearLayout.getVisibility() == View.GONE) {
+                                carinfoLinearLayout.setVisibility(View.VISIBLE);
+                            }
                         } else if (status == Config.EXEC_ERROR){
                             String info = jsonObject.getString("info");
                             Toast.makeText(CarinfoActivity.this, info, Toast.LENGTH_LONG).show();
@@ -165,24 +172,24 @@ public class CarinfoActivity extends AppCompatActivity {
                     }
 
                 } else if (message.what == Config.REQUEST_ERROR){
-                    Toast.makeText(CarinfoActivity.this, R.string.query_error, Toast.LENGTH_LONG).show();
+                    Toast.makeText(CarinfoActivity.this, R.string.request_error, Toast.LENGTH_LONG).show();
                 }
 
-                changeFabStatus(1);
+                changeButtonStatus(1);
             }
         };
 
     }
 
-    private void getCarInfo(final String plateNumber) {
+    private void getUserinfo(final String plateNumber) {
         new Thread(new Runnable() {
             @Override
             public void run() {
 
-                String requestUrl = Config.httpUrl + "/web/car/getcarinfo";
+                String requestUrl = Config.httpUrl + "/web/car/getuserinfo";
 
                 try {
-                    String data = "plate_number=" + URLEncoder.encode(plateNumber, "UTF-8");
+                    String data = "platenumber=" + URLEncoder.encode(plateNumber, "UTF-8");
 
                     URL url = new URL(requestUrl);
                     HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
@@ -231,20 +238,19 @@ public class CarinfoActivity extends AppCompatActivity {
                 }
             }
         }).start();
-
     }
 
     public void dialMobile(String mobile) {
 
     }
 
-    private void changeFabStatus(int status) {
+    private void changeButtonStatus(int status) {
         if (status == 0) {
-            carSearch.setEnabled(false);
-            carSearch.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorButtonDisabled)));
+            carinfoSearch.setEnabled(false);
+            carinfoSearch.setBackgroundResource(R.color.colorButtonDisabled);
         } else {
-            carSearch.setEnabled(true);
-            carSearch.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorButton)));
+            carinfoSearch.setEnabled(true);
+            carinfoSearch.setBackgroundResource(R.drawable.selector_button_search);
         }
     }
 

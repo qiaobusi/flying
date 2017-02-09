@@ -30,7 +30,7 @@
         <activity android:name=".activity.RegisterActivity" />
         <activity android:name=".activity.UcenterActivity" />
         <activity android:name=".activity.CarinfoActivity" />
-        <activity android:name=".activity.ForgetPasswordActivity"></activity>
+        <activity android:name=".activity.ForgetPasswordActivity" />
 
         <receiver android:name=".receiver.PhoneStateReceiver">
             <intent-filter android:priority="1000">
@@ -44,6 +44,7 @@
             </intent-filter>
         </receiver>
 
+        <activity android:name=".activity.PasswordActivity"></activity>
     </application>
 
 </manifest>

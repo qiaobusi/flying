@@ -6,12 +6,13 @@
 
     <!-- common -->
     <color name="colorWhite">#FFFFFF</color>
-    <color name="colorIconBg">#36C198</color>
     <color name="colorWindow">#ECEDF1</color>
     <color name="colorButton">#FF5722</color>
     <color name="colorButtonDisabled">#BDBDBD</color>
     <color name="colorButtonRipple">#E64A19</color>
     <color name="colorInputRipple">#E3E2E2</color>
+    <color name="colorIcon">#4CAF50</color>
+    <color name="colorIconRipple">#388E3C</color>
 
     <!-- wheel -->
     <color name="colorWheelLine">#FF5722</color>
