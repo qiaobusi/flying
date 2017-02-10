@@ -55,7 +55,6 @@ public class IdcardActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String idcard = idcardNumber.getText().toString().trim();
-
                 if (idcard.length() == 0) {
                     return;
                 }

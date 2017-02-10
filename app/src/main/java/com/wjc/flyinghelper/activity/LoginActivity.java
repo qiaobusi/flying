@@ -72,7 +72,6 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String mobile = loginMobile.getText().toString().trim();
                 String password = loginPassword.getText().toString();
-
                 if (mobile.length() == 0 || password.length() == 0) {
                     return;
                 }

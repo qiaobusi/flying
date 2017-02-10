@@ -109,6 +109,9 @@ public class ForgetPasswordActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String mobile = passwordMobile.getText().toString().trim();
+                if (mobile.length() == 0) {
+                    return;
+                }
 
                 sendCode(mobile);
             }
@@ -120,7 +123,6 @@ public class ForgetPasswordActivity extends AppCompatActivity {
                 String mobile = passwordMobile.getText().toString().trim();
                 String password = passwordPassword.getText().toString();
                 String code = passwordCode.getText().toString().trim();
-
                 if (mobile.length() == 0 || password.length() == 0 || code.length() == 0) {
                     return;
                 }

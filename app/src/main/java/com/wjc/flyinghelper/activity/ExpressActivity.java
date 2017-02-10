@@ -67,7 +67,6 @@ public class ExpressActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String express = expressNumber.getText().toString().trim();
-
                 if (express.length() == 0) {
                     return;
                 }

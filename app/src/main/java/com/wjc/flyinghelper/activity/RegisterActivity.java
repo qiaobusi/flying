@@ -134,7 +134,6 @@ public class RegisterActivity extends AppCompatActivity {
                 String mobile = registerMobile.getText().toString().trim();
                 String password = registerPassword.getText().toString();
                 String code = registerCode.getText().toString().trim();
-
                 if (mobile.length() == 0 || password.length() == 0 || code.length() == 0) {
                     return;
                 }

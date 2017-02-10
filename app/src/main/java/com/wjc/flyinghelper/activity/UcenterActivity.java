@@ -167,9 +167,12 @@ public class UcenterActivity extends AppCompatActivity {
         ucenterSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String provinceAz = ucenterProvinceAz.getText().toString();
                 String name = ucenterName.getText().toString().trim();
+                String provinceAz = ucenterProvinceAz.getText().toString();
                 String platenumber = ucenterPlatenumber.getText().toString().trim();
+                if (name.length() == 0 || platenumber.length() == 0) {
+                    return;
+                }
                 platenumber = provinceAz + Config.platenumberSeparate + platenumber;
 
                 saveUserinfo(id, name, platenumber);
@@ -188,7 +191,7 @@ public class UcenterActivity extends AppCompatActivity {
                 editor.putString(Config.userinfoPlatenumber, "");
                 editor.commit();
 
-                UcenterActivity.this.finish();
+                finish();
             }
         });
 

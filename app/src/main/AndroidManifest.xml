@@ -23,15 +23,24 @@
         </activity>
         <activity android:name=".activity.SleepActivity" />
         <activity android:name=".activity.EnvironmentActivity" />
-        <activity android:name=".activity.ExpressActivity" />
-        <activity android:name=".activity.MobileActivity" />
-        <activity android:name=".activity.IdcardActivity" />
-        <activity android:name=".activity.LoginActivity" />
-        <activity android:name=".activity.RegisterActivity" />
-        <activity android:name=".activity.UcenterActivity" />
-        <activity android:name=".activity.CarinfoActivity" />
-        <activity android:name=".activity.ForgetPasswordActivity" />
-        <activity android:name=".activity.PasswordActivity"></activity>
+        <activity android:name=".activity.ExpressActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
+        <activity android:name=".activity.MobileActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
+        <activity android:name=".activity.IdcardActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
+        <activity android:name=".activity.LoginActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
+        <activity android:name=".activity.RegisterActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
+        <activity android:name=".activity.UcenterActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
+        <activity android:name=".activity.CarinfoActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
+        <activity android:name=".activity.ForgetPasswordActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
+        <activity android:name=".activity.PasswordActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
 
         <receiver android:name=".receiver.PhoneStateReceiver">
             <intent-filter android:priority="1000">

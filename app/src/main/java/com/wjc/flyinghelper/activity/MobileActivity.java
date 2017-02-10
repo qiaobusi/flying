@@ -51,7 +51,6 @@ public class MobileActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String mobile = mobileNumber.getText().toString().trim();
-
                 if (mobile.length() == 0) {
                     return;
                 }

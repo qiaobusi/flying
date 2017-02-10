@@ -66,7 +66,6 @@ public class PasswordActivity extends AppCompatActivity {
                 String oldPassword = passwordOld.getText().toString();
                 String password = passwordNew.getText().toString();
                 String repeatPassword = passwordRepeat.getText().toString();
-
                 if (oldPassword.length() == 0 || password.length() == 0 || repeatPassword.length() == 0) {
                     return;
                 }

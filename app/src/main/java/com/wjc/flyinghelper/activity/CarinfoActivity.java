@@ -1,8 +1,13 @@
 package com.wjc.flyinghelper.activity;
 
+import android.Manifest;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -137,11 +142,10 @@ public class CarinfoActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String provinceAz = carinfoProvinceAz.getText().toString();
                 String platenumber = carinfoPlatenumber.getText().toString().trim();
-                platenumber = provinceAz + Config.platenumberSeparate + platenumber;
-
                 if (platenumber.length() == 0) {
                     return;
                 }
+                platenumber = provinceAz + Config.platenumberSeparate + platenumber;
 
                 getUserinfo(platenumber);
 
@@ -169,7 +173,7 @@ public class CarinfoActivity extends AppCompatActivity {
                             if (carinfoLinearLayout.getVisibility() == View.GONE) {
                                 carinfoLinearLayout.setVisibility(View.VISIBLE);
                             }
-                        } else if (status == Config.EXEC_ERROR){
+                        } else if (status == Config.EXEC_ERROR) {
                             String info = jsonObject.getString("info");
                             Toast.makeText(CarinfoActivity.this, info, Toast.LENGTH_LONG).show();
                         }
@@ -177,7 +181,7 @@ public class CarinfoActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
 
-                } else if (message.what == Config.REQUEST_ERROR){
+                } else if (message.what == Config.REQUEST_ERROR) {
                     Toast.makeText(CarinfoActivity.this, R.string.request_error, Toast.LENGTH_LONG).show();
                 }
 
@@ -252,7 +256,11 @@ public class CarinfoActivity extends AppCompatActivity {
     }
 
     public void dialMobile(String mobile) {
-
+        Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + mobile));
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        startActivity(intent);
     }
 
     private void changeButtonStatus(int status) {
