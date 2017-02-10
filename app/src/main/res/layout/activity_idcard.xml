@@ -13,53 +13,62 @@
         <include
             layout="@layout/toolbar"/>
 
-        <EditText
-            android:id="@+id/idcardNumber"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="@dimen/input_height"
-            android:layout_marginTop="@dimen/edittext_margin_top"
-            android:paddingLeft="@dimen/padding_left"
-            android:paddingRight="@dimen/padding_right"
-            android:background="@color/colorWhite"
-            android:textSize="@dimen/text_size"
-            android:hint="@string/idcard_number"
-            android:inputType="phone"/>
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/idcardArea"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/input_height"
-            android:layout_marginTop="@dimen/line_height"
-            android:paddingLeft="@dimen/padding_left"
-            android:paddingRight="@dimen/padding_right"
-            android:gravity="center_vertical"
-            android:background="@color/colorWhite"
-            android:textSize="@dimen/text_size"
-            android:visibility="gone"/>
+                <EditText
+                    android:id="@+id/idcardNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/input_height"
+                    android:layout_marginTop="@dimen/edittext_margin_top"
+                    android:paddingLeft="@dimen/padding_left"
+                    android:paddingRight="@dimen/padding_right"
+                    android:background="@color/colorWhite"
+                    android:textSize="@dimen/text_size"
+                    android:hint="@string/idcard_number"
+                    android:inputType="phone"/>
+                <TextView
+                    android:id="@+id/idcardArea"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/input_height"
+                    android:layout_marginTop="@dimen/line_height"
+                    android:paddingLeft="@dimen/padding_left"
+                    android:paddingRight="@dimen/padding_right"
+                    android:gravity="center_vertical"
+                    android:background="@color/colorWhite"
+                    android:textSize="@dimen/text_size"
+                    android:visibility="gone"/>
+                <TextView
+                    android:id="@+id/idcardBirth"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/input_height"
+                    android:layout_marginTop="@dimen/line_height"
+                    android:paddingLeft="@dimen/padding_left"
+                    android:paddingRight="@dimen/padding_right"
+                    android:gravity="center_vertical"
+                    android:background="@color/colorWhite"
+                    android:textSize="@dimen/text_size"
+                    android:visibility="gone"/>
+                <TextView
+                    android:id="@+id/idcardSex"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/input_height"
+                    android:layout_marginTop="@dimen/line_height"
+                    android:paddingLeft="@dimen/padding_left"
+                    android:paddingRight="@dimen/padding_right"
+                    android:gravity="center_vertical"
+                    android:background="@color/colorWhite"
+                    android:textSize="@dimen/text_size"
+                    android:visibility="gone"/>
 
-        <TextView
-            android:id="@+id/idcardBirth"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/input_height"
-            android:layout_marginTop="@dimen/line_height"
-            android:paddingLeft="@dimen/padding_left"
-            android:paddingRight="@dimen/padding_right"
-            android:gravity="center_vertical"
-            android:background="@color/colorWhite"
-            android:textSize="@dimen/text_size"
-            android:visibility="gone"/>
+            </LinearLayout>
+        </ScrollView>
 
-        <TextView
-            android:id="@+id/idcardSex"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/input_height"
-            android:layout_marginTop="@dimen/line_height"
-            android:paddingLeft="@dimen/padding_left"
-            android:paddingRight="@dimen/padding_right"
-            android:gravity="center_vertical"
-            android:background="@color/colorWhite"
-            android:textSize="@dimen/text_size"
-            android:visibility="gone"/>
     </LinearLayout>
 
     <android.support.design.widget.FloatingActionButton
