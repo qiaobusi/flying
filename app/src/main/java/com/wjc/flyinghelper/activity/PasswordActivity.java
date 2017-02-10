@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.wjc.flyinghelper.R;
 import com.wjc.flyinghelper.config.Config;
+import com.wjc.flyinghelper.util.HelperVerify;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -26,6 +27,7 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.HashMap;
 
 public class PasswordActivity extends AppCompatActivity {
 
@@ -73,7 +75,10 @@ public class PasswordActivity extends AppCompatActivity {
                     return;
                 }
 
-                savePassword(oldPassword, password);
+                sharedPreferences = getSharedPreferences(Config.userinfo, Context.MODE_PRIVATE);
+                String id = sharedPreferences.getString(Config.userinfoId, "");
+
+                savePassword(id, oldPassword, password);
 
                 changeButtonStatus(0);
             }
@@ -112,19 +117,23 @@ public class PasswordActivity extends AppCompatActivity {
     }
 
 
-    private void savePassword(final String oldPassword, final String password) {
+    private void savePassword(final String id, final String oldPassword, final String password) {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 String requestUrl = Config.httpUrl + "/web/car/savepassword";
 
-                sharedPreferences = getSharedPreferences(Config.userinfo, Context.MODE_PRIVATE);
-                String id = sharedPreferences.getString(Config.userinfoId, "");
+                HashMap<String, String> hashMap = new HashMap<String, String>();
+                hashMap.put("id", id);
+                hashMap.put("oldPassword", oldPassword);
+                hashMap.put("password", password);
+                String sign = HelperVerify.sign(hashMap);
 
                 try {
                     String data = "id=" + URLEncoder.encode(id, "UTF-8")
                             + "&oldPassword=" + URLEncoder.encode(oldPassword, "UTF-8")
-                            + "&password=" + URLEncoder.encode(password, "UTF-8");
+                            + "&password=" + URLEncoder.encode(password, "UTF-8")
+                            + "&sign=" + URLEncoder.encode(sign, "UTF-8");
 
                     URL url = new URL(requestUrl);
                     HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();

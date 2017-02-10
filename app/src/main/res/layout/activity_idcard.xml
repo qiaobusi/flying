@@ -14,7 +14,7 @@
             layout="@layout/toolbar"/>
 
         <EditText
-            android:id="@+id/idcard"
+            android:id="@+id/idcardNumber"
             android:layout_width="match_parent"
             android:layout_height="@dimen/input_height"
             android:layout_marginTop="@dimen/edittext_margin_top"
@@ -22,7 +22,7 @@
             android:paddingRight="@dimen/padding_right"
             android:background="@color/colorWhite"
             android:textSize="@dimen/text_size"
-            android:hint="@string/idcard"
+            android:hint="@string/idcard_number"
             android:inputType="phone"/>
 
         <TextView

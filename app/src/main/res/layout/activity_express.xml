@@ -14,7 +14,7 @@
             layout="@layout/toolbar"/>
 
         <EditText
-            android:id="@+id/express"
+            android:id="@+id/expressNumber"
             android:layout_width="match_parent"
             android:layout_height="@dimen/input_height"
             android:layout_marginTop="@dimen/edittext_margin_top"
@@ -22,7 +22,7 @@
             android:paddingRight="@dimen/padding_right"
             android:background="@color/colorWhite"
             android:textSize="@dimen/text_size"
-            android:hint="@string/express"
+            android:hint="@string/express_number"
             android:inputType="phone"/>
 
         <TextView
@@ -37,7 +37,7 @@
             android:textSize="@dimen/text_size"
             android:visibility="gone"/>
         <ScrollView
-            android:id="@+id/traceScrollView"
+            android:id="@+id/expressScrollView"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_0"
             android:layout_weight="1"

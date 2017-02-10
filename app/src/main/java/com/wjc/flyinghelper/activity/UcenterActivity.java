@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.jp.wheelview.WheelView;
 import com.wjc.flyinghelper.R;
 import com.wjc.flyinghelper.config.Config;
+import com.wjc.flyinghelper.util.HelperVerify;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -33,6 +34,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public class UcenterActivity extends AppCompatActivity {
@@ -239,10 +241,17 @@ public class UcenterActivity extends AppCompatActivity {
             public void run() {
                 String requestUrl = Config.httpUrl + "/web/car/saveuserinfo";
 
+                HashMap<String, String> hashMap = new HashMap<String, String>();
+                hashMap.put("id", id);
+                hashMap.put("name", name);
+                hashMap.put("platenumber", platenumber);
+                String sign = HelperVerify.sign(hashMap);
+
                 try {
                     String data = "id=" + URLEncoder.encode(id, "UTF-8")
                             + "&name=" + URLEncoder.encode(name, "UTF-8")
-                            + "&platenumber=" + URLEncoder.encode(platenumber, "UTF-8");
+                            + "&platenumber=" + URLEncoder.encode(platenumber, "UTF-8")
+                            + "&sign=" + URLEncoder.encode(sign, "UTF-8");
 
                     URL url = new URL(requestUrl);
                     HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();

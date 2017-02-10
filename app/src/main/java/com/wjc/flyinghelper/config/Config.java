@@ -20,6 +20,7 @@ public class Config {
     public static final String userinfoPlatenumber = "userinfoPlatenumber";
 
     public static final String httpUrl = "http://111.67.201.241";
+    public static final String downloadUrl = "http://111.67.201.241/apk/helper.apk";
 
     public static final String platenumberSeparate = "=";
 

@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.wjc.flyinghelper.R;
 import com.wjc.flyinghelper.config.Config;
+import com.wjc.flyinghelper.util.HelperVerify;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,6 +28,7 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.HashMap;
 
 public class ExpressActivity extends AppCompatActivity {
 
@@ -141,8 +143,14 @@ public class ExpressActivity extends AppCompatActivity {
             @Override
             public void run() {
                 String requestUrl = Config.httpUrl + "/web/express/index";
+
+                HashMap<String, String> hashMap = new HashMap<String, String>();
+                hashMap.put("logisticCode", logisticCode);
+                String sign = HelperVerify.sign(hashMap);
+
                 try {
-                    String data = "logisticCode=" + URLEncoder.encode(logisticCode, "UTF-8");
+                    String data = "logisticCode=" + URLEncoder.encode(logisticCode, "UTF-8")
+                            + "&sign=" + URLEncoder.encode(sign, "UTF-8");
 
                     URL url = new URL(requestUrl);
                     HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();

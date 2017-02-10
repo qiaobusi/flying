@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.jp.wheelview.WheelView;
 import com.wjc.flyinghelper.R;
 import com.wjc.flyinghelper.config.Config;
+import com.wjc.flyinghelper.util.HelperVerify;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -29,6 +30,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class CarinfoActivity extends AppCompatActivity {
     private TextView carinfoProvinceAz;
@@ -185,15 +187,20 @@ public class CarinfoActivity extends AppCompatActivity {
 
     }
 
-    private void getUserinfo(final String plateNumber) {
+    private void getUserinfo(final String platenumber) {
         new Thread(new Runnable() {
             @Override
             public void run() {
 
                 String requestUrl = Config.httpUrl + "/web/car/getuserinfo";
 
+                HashMap<String, String> hashMap = new HashMap<String, String>();
+                hashMap.put("platenumber", platenumber);
+                String sign = HelperVerify.sign(hashMap);
+
                 try {
-                    String data = "platenumber=" + URLEncoder.encode(plateNumber, "UTF-8");
+                    String data = "platenumber=" + URLEncoder.encode(platenumber, "UTF-8")
+                            + "&sign=" + URLEncoder.encode(sign, "UTF-8");
 
                     URL url = new URL(requestUrl);
                     HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
