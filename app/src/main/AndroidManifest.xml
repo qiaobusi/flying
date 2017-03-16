@@ -32,6 +32,7 @@
         <activity android:name=".activity.CarinfoActivity" />
         <activity android:name=".activity.ForgetPasswordActivity" />
         <activity android:name=".activity.PasswordActivity" />
+        <activity android:name=".activity.GoodevilActivity"/>
 
         <receiver android:name=".receiver.PhoneStateReceiver">
             <intent-filter android:priority="1000">

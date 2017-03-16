@@ -73,6 +73,9 @@ public class LifeGridViewAdapter extends BaseAdapter {
             case 4 :
                 lifeCardIcon.setText(context.getString(R.string.icon_idcard));
                 break;
+            case 5 :
+                lifeCardIcon.setText(context.getString(R.string.icon_person));
+                break;
         }
 
         TextView lifeCardName = viewHolder.lifeCardName;

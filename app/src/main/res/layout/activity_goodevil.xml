@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ListView
+        android:id="@+id/goodevilListView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/input_height"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/evilPublish"
+            android:layout_width="@dimen/dp_0"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:textSize="@dimen/text_size"
+            android:textColor="@color/colorWhite"
+            android:gravity="center"
+            android:background="@drawable/selector_button_search"
+            android:text="@string/goodevil_evil"/>
+        <Button
+            android:id="@+id/goodPublish"
+            android:layout_width="@dimen/dp_0"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:textSize="@dimen/text_size"
+            android:textColor="@color/colorWhite"
+            android:gravity="center"
+            android:background="@drawable/selector_button_dial"
+            android:text="@string/goodevil_good"/>
+    </LinearLayout>
+    
+</LinearLayout>

@@ -16,6 +16,8 @@
     <string name="icon_express">&#xe605;</string>
     <string name="icon_mobile">&#xe606;</string>
     <string name="icon_idcard">&#xe607;</string>
+    <string name="icon_person">&#xe625;</string>
+    <string name="icon_goodevil">&#xe667;</string>
 
     <!-- toolbar -->
     <string name="toolbar_sleep">睡眠助手</string>
@@ -23,6 +25,7 @@
     <string name="toolbar_express">快递查询</string>
     <string name="toolbar_mobile">手机归属地</string>
     <string name="toolbar_idcard">身份证查询</string>
+    <string name="toolbar_goodevil">惩恶扬善</string>
     <string name="toolbar_login">用户登录</string>
     <string name="toolbar_register">用户注册</string>
     <string name="toolbar_forget_password">重置密码</string>
@@ -42,6 +45,7 @@
     <string name="life_express">快递查询</string>
     <string name="life_mobile">手机归属地</string>
     <string name="life_idcard">身份证查询</string>
+    <string name="life_goodevil">惩恶扬善</string>
 
     <!-- fragment_car -->
     <string name="car_info">车辆信息查询</string>
@@ -79,6 +83,11 @@
 
     <!-- activity_idcard -->
     <string name="idcard_number">身份证号码</string>
+
+    <!-- activity_goodevil -->
+    <string name="goodevil_evil">我要惩恶</string>
+    <string name="goodevil_good">我要扬善</string>
+    <string name="goodevil_load">努力加载中...</string>
 
     <!-- activity_login -->
     <string name="login_mobile">手机号码</string>

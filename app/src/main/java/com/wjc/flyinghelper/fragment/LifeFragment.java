@@ -15,6 +15,7 @@ import android.widget.GridView;;
 import com.wjc.flyinghelper.R;
 import com.wjc.flyinghelper.activity.EnvironmentActivity;
 import com.wjc.flyinghelper.activity.ExpressActivity;
+import com.wjc.flyinghelper.activity.GoodevilActivity;
 import com.wjc.flyinghelper.activity.IdcardActivity;
 import com.wjc.flyinghelper.activity.MobileActivity;
 import com.wjc.flyinghelper.activity.SleepActivity;
@@ -33,7 +34,7 @@ public class LifeFragment extends Fragment {
 
     private int[] card = {
             R.string.life_sleep, R.string.life_environment, R.string.life_express,
-            R.string.life_mobile, R.string.life_idcard,
+            R.string.life_mobile, R.string.life_idcard, R.string.life_goodevil,
     };
     private ArrayList<String> arrayList;
 
@@ -89,6 +90,10 @@ public class LifeFragment extends Fragment {
                         break;
                     case 4 :
                         intent = new Intent(activity, IdcardActivity.class);
+                        startActivity(intent);
+                        break;
+                    case 5 :
+                        intent = new Intent(activity, GoodevilActivity.class);
                         startActivity(intent);
                         break;
                 }
